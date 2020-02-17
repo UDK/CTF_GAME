@@ -6,14 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using CTF_GAME;
 
-namespace CTF_GAME
+namespace CTF_GAME.Controllers
 {
     class Server
     {
+        const int _timeOutGetData = 5000;
         const int _lenghtBuffer = 4096;
         private int _port = 9090;
         private IPAddress _ipAddress = IPAddress.Parse("127.0.0.1");
+        List<TcpClient> tcpClients = new List<TcpClient>();
 
         public int Port
         {
@@ -37,31 +40,27 @@ namespace CTF_GAME
             tcpServer.Start();
             while(true)
             {
-                TcpClient tcpClient = tcpServer.AcceptTcpClient();
-                Console.WriteLine(ResponseServer(tcpClient.GetStream()));
-                Console.WriteLine(ReadServer(tcpClient.GetStream()));
+                this.tcpClients.Add(tcpServer.AcceptTcpClient());
+                CommunicationServer communicationServer = new CommunicationServer(tcpClients[tcpClients.Count - 1].GetStream());
             }
         }
 
         //String надо будет заменить на класс, структуру которая будет приходить(структуру/класс надо ещё сделать)
-        private string ReadServer(NetworkStream networkStream)
+        static public async Task<string> ReadServerAsync(NetworkStream networkStream)
         {
             List<byte> resultText =  new List<byte>();
             byte[] textBuffer = new byte [_lenghtBuffer];
             int offset = 0;
-            while(networkStream.CanRead)
-            {
                 textBuffer = new byte[_lenghtBuffer];
-                networkStream.Read(textBuffer, offset, (int)networkStream.Length);
+                await networkStream.ReadAsync(textBuffer, offset, _lenghtBuffer);
                 offset += _lenghtBuffer;
                 resultText.AddRange(textBuffer.Select(element => element));
-            }
             return Encoding.ASCII.GetString(textBuffer);
         }
 
-        private bool ResponseServer(NetworkStream networkStream)
+        static async public Task<bool> ResponseServerAsync(NetworkStream networkStream, string message)
         {
-            networkStream.Write(Encoding.ASCII.GetBytes("HI"));
+            await networkStream.WriteAsync(Encoding.ASCII.GetBytes(message));
             return true;
         }
     }
