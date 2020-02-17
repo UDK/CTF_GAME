@@ -6,14 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using CTF_GAME;
 
-namespace CTF_GAME
+namespace CTF_GAME.Controllers
 {
     class Server
     {
-        const int _lenghtBuffer = 4096;
+        const int _timeOutGetData = 5000;
+        const int _lenghtBuffer = 1024;
         private int _port = 9090;
         private IPAddress _ipAddress = IPAddress.Parse("127.0.0.1");
+        List<CommunicationServer> tcpClients = new List<CommunicationServer>();
 
         public int Port
         {
@@ -29,39 +32,33 @@ namespace CTF_GAME
 
         public Server()
         {
-            StartServer(new TcpListener(IpAddr,Port));
+            StartServer(new TcpListener(IpAddr, Port));
         }
 
         private void StartServer(TcpListener tcpServer)
         {
             tcpServer.Start();
-            while(true)
+            while (true)
             {
-                TcpClient tcpClient = tcpServer.AcceptTcpClient();
-                Console.WriteLine(ResponseServer(tcpClient.GetStream()));
-                Console.WriteLine(ReadServer(tcpClient.GetStream()));
+                tcpClients.Add(new CommunicationServer(tcpServer.AcceptTcpClient().GetStream()));
             }
         }
 
         //String надо будет заменить на класс, структуру которая будет приходить(структуру/класс надо ещё сделать)
-        private string ReadServer(NetworkStream networkStream)
+        static public async Task<string> ReadServerAsync(NetworkStream networkStream)
         {
-            List<byte> resultText =  new List<byte>();
-            byte[] textBuffer = new byte [_lenghtBuffer];
+            List<byte> resultText = new List<byte>();
+            byte[] textBuffer = new byte[_lenghtBuffer];
             int offset = 0;
-            while(networkStream.CanRead)
-            {
-                textBuffer = new byte[_lenghtBuffer];
-                networkStream.Read(textBuffer, offset, (int)networkStream.Length);
-                offset += _lenghtBuffer;
-                resultText.AddRange(textBuffer.Select(element => element));
-            }
+            await networkStream.ReadAsync(textBuffer, offset, _lenghtBuffer);
+            offset += _lenghtBuffer;
+            resultText.AddRange(textBuffer.Select(element => element));
             return Encoding.ASCII.GetString(textBuffer);
         }
 
-        private bool ResponseServer(NetworkStream networkStream)
+        static async public Task<bool> ResponseServerAsync(NetworkStream networkStream, string message)
         {
-            networkStream.Write(Encoding.ASCII.GetBytes("HI"));
+            await networkStream.WriteAsync(Encoding.ASCII.GetBytes(message));
             return true;
         }
     }
