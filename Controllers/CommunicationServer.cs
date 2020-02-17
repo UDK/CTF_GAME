@@ -17,8 +17,13 @@ namespace CTF_GAME.Controllers
         public CommunicationServer(NetworkStream networkStream)
         {
             this.networkStreamWithClient = networkStream;
+            Start();
+        }
+
+        public async void Start()
+        {
             Hello();
-            Console.WriteLine(Server.ReadServerAsync(networkStreamWithClient).GetAwaiter().GetResult());
+            Console.WriteLine(await Server.ReadServerAsync(networkStreamWithClient));
         }
 
         public void Hello()

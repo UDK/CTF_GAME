@@ -16,7 +16,7 @@ namespace CTF_GAME.Controllers
         const int _lenghtBuffer = 4096;
         private int _port = 9090;
         private IPAddress _ipAddress = IPAddress.Parse("127.0.0.1");
-        List<TcpClient> tcpClients = new List<TcpClient>();
+        List<CommunicationServer> tcpClients = new List<CommunicationServer>();
 
         public int Port
         {
@@ -40,8 +40,7 @@ namespace CTF_GAME.Controllers
             tcpServer.Start();
             while(true)
             {
-                this.tcpClients.Add(tcpServer.AcceptTcpClient());
-                CommunicationServer communicationServer = new CommunicationServer(tcpClients[tcpClients.Count - 1].GetStream());
+                tcpClients.Add(new CommunicationServer(tcpServer.AcceptTcpClient().GetStream()));
             }
         }
 
