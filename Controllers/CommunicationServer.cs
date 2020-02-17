@@ -23,7 +23,6 @@ namespace CTF_GAME.Controllers
         public async void Start()
         {
             Hello();
-            Console.WriteLine(await Server.ReadServerAsync(networkStreamWithClient));
         }
 
         public void Hello()
