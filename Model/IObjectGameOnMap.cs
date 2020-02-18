@@ -14,6 +14,6 @@ namespace CTF_GAME.Model
         /// Возвращает ASCII представление объекта
         /// </summary>
         /// <returns>Представление объекта на карте, в виде ASCII кода</returns>
-        public byte GetASCII ();
+        public byte GetASCII { get; }
     }
 }

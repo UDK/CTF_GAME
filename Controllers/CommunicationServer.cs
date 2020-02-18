@@ -11,7 +11,7 @@ namespace CTF_GAME.Controllers
 {
     public class CommunicationServer
     {
-        const string _helloWorld = "Hi Bro, nice dick";
+        const string _helloWorld = " #     # ###    ######                                                                        \n #     #  #     #     # #####   ####         #    # #  ####  ######    #####  #  ####  #    # \n #     #  #     #     # #    # #    #        ##   # # #    # #         #    # # #    # #   #  \n #######  #     ######  #    # #    #        # #  # # #      #####     #    # # #      ####   \n #     #  #     #     # #####  #    # ###    #  # # # #      #         #    # # #      #  #   \n #     #  #     #     # #   #  #    # ###    #   ## # #    # #         #    # # #    # #   #  \n #     # ###    ######  #    #  ####   #     #    # #  ####  ######    #####  #  ####  #    # \n";
         
         private NetworkStream networkStreamWithClient;
         public CommunicationServer(NetworkStream networkStream)
@@ -20,7 +20,7 @@ namespace CTF_GAME.Controllers
             Start();
         }
 
-        public async void Start()
+        public void Start()
         {
             Hello();
         }
