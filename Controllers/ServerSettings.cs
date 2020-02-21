@@ -10,7 +10,10 @@ using CTF_GAME;
 
 namespace CTF_GAME.Controllers
 {
-    class Server
+    /// <summary>
+    /// Отвечает за начальную настройку tcp-сервера
+    /// </summary>
+    class ServerSettings
     {
         const int _timeOutGetData = 5000;
         const int _lenghtBuffer = 1024;
@@ -30,7 +33,7 @@ namespace CTF_GAME.Controllers
             set => _ipAddress = value;
         }
 
-        public Server()
+        public ServerSettings()
         {
             StartServer(new TcpListener(IpAddr, Port));
         }

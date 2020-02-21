@@ -8,8 +8,13 @@ namespace CTF_GAME.Model
     /// <summary>
     /// От этого интерфейса должны наследоваться все игровые объекты на карте
     /// </summary>
-    interface IObjectGameOnMap
+    public interface IObjectGameOnMap
     {
+
+        /// <summary>
+        /// Класс работы с рандомом
+        /// </summary>
+        int GetRandom();
         /// <summary>
         /// Возвращает ASCII представление объекта
         /// </summary>

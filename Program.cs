@@ -12,7 +12,7 @@ namespace CTF_GAME
     {
         static void Main(string[] args)
         {
-            Server server = new Server();
+            ServerSettings server = new ServerSettings();
         }   
     }
 }

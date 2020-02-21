@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace CTF_GAME.Controllers
 {
+    /// <summary>
+    /// Здесь отдаем ответ клиенту
+    /// </summary>
     public class CommunicationServer
     {
         const string _helloWorld = " #     # ###    ######                                                                        \n #     #  #     #     # #####   ####         #    # #  ####  ######    #####  #  ####  #    # \n #     #  #     #     # #    # #    #        ##   # # #    # #         #    # # #    # #   #  \n #######  #     ######  #    # #    #        # #  # # #      #####     #    # # #      ####   \n #     #  #     #     # #####  #    # ###    #  # # # #      #         #    # # #      #  #   \n #     #  #     #     # #   #  #    # ###    #   ## # #    # #         #    # # #    # #   #  \n #     # ###    ######  #    #  ####   #     #    # #  ####  ######    #####  #  ####  #    # \n";
@@ -20,16 +23,20 @@ namespace CTF_GAME.Controllers
             Start();
         }
 
-        public void Start()
+        public async void Start()
         {
             Hello();
+            while (true)
+            {
+                string responseOfClient = await ServerSettings.ReadServerAsync(networkStreamWithClient);
+                
+            }
         }
 
         public void Hello()
         {
-            Server.ResponseServerAsync(this.networkStreamWithClient, _helloWorld).GetAwaiter().GetResult();
+            ServerSettings.ResponseServerAsync(this.networkStreamWithClient, _helloWorld).GetAwaiter().GetResult();
         }
-
 
 
     }
