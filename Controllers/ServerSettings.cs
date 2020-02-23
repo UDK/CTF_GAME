@@ -11,7 +11,7 @@ using CTF_GAME;
 namespace CTF_GAME.Controllers
 {
     /// <summary>
-    /// Отвечает за начальную настройку tcp-сервера
+    /// Отвечает за начальную настройку tcp-сервера и его работу(чтение и ответ клиенту)
     /// </summary>
     class ServerSettings
     {
@@ -37,7 +37,10 @@ namespace CTF_GAME.Controllers
         {
             StartServer(new TcpListener(IpAddr, Port));
         }
-
+        /// <summary>
+        /// Стартуем + бесконечно читаем порт и работаем с клиентами
+        /// </summary>
+        /// <param name="tcpServer">Настроенный tcp-сервер</param>
         private void StartServer(TcpListener tcpServer)
         {
             tcpServer.Start();
@@ -46,7 +49,11 @@ namespace CTF_GAME.Controllers
                 tcpClients.Add(new CommunicationServer(tcpServer.AcceptTcpClient().GetStream()));
             }
         }
-
+        /// <summary>
+        /// Ассинхронно читаем, что прислал клиент
+        /// </summary>
+        /// <param name="networkStream">Рабочий поток для работы с клиентом</param>
+        /// <returns>Ответ от клииента</returns>
         //String надо будет заменить на класс, структуру которая будет приходить(структуру/класс надо ещё сделать)
         static public async Task<string> ReadServerAsync(NetworkStream networkStream)
         {
@@ -59,6 +66,12 @@ namespace CTF_GAME.Controllers
             return Encoding.ASCII.GetString(textBuffer);
         }
 
+        /// <summary>
+        /// Отправляем ответ клиенту
+        /// </summary>
+        /// <param name="networkStream">рабочий поток для работы с клиентом</param>
+        /// <param name="message">то что отправляем кленту</param>
+        /// <returns></returns>
         static async public Task ResponseServerAsync(NetworkStream networkStream, string message)
         {
             await networkStream.WriteAsync(Encoding.ASCII.GetBytes(message));
