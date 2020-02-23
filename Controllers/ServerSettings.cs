@@ -10,7 +10,10 @@ using CTF_GAME;
 
 namespace CTF_GAME.Controllers
 {
-    class Server
+    /// <summary>
+    /// Отвечает за начальную настройку tcp-сервера
+    /// </summary>
+    class ServerSettings
     {
         const int _timeOutGetData = 5000;
         const int _lenghtBuffer = 1024;
@@ -30,7 +33,7 @@ namespace CTF_GAME.Controllers
             set => _ipAddress = value;
         }
 
-        public Server()
+        public ServerSettings()
         {
             StartServer(new TcpListener(IpAddr, Port));
         }
@@ -56,10 +59,9 @@ namespace CTF_GAME.Controllers
             return Encoding.ASCII.GetString(textBuffer);
         }
 
-        static async public Task<bool> ResponseServerAsync(NetworkStream networkStream, string message)
+        static async public Task ResponseServerAsync(NetworkStream networkStream, string message)
         {
             await networkStream.WriteAsync(Encoding.ASCII.GetBytes(message));
-            return true;
         }
     }
 }
