@@ -59,10 +59,9 @@ namespace CTF_GAME.Controllers
             return Encoding.ASCII.GetString(textBuffer);
         }
 
-        static async public Task<bool> ResponseServerAsync(NetworkStream networkStream, string message)
+        static async public Task ResponseServerAsync(NetworkStream networkStream, string message)
         {
             await networkStream.WriteAsync(Encoding.ASCII.GetBytes(message));
-            return true;
         }
     }
 }

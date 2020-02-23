@@ -39,7 +39,7 @@ namespace CTF_GAME.Model
 
         int IObjectGameOnMap.GetRandom()
         {
-
+            return 100;
         }
     }
 }

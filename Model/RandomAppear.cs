@@ -23,12 +23,12 @@ namespace CTF_GAME.Model
             this.changeAppereance = changeAppereance;
         }
 
-        bool GetRandom()
-        {
-            Random random = new Random();
-            random.Next(1, 100);
+        //bool GetRandom()
+        //{
+        //    Random random = new Random();
+        //    random.Next(1, 100);
 
-        }
+        //}
 
     }
 }
