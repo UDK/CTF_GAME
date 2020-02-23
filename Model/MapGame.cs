@@ -97,7 +97,12 @@ namespace CTF_GAME.Model
             }
             return viewMap.ToString();
         }
-
+        /// <summary>
+        /// Получаем ASCII код с указанной точки на карте
+        /// </summary>
+        /// <param name="hor">точка по горизонтали</param>
+        /// <param name="vert">точка по вертикали</param>
+        /// <returns>полученный ответ</returns>
         private char GetCharPointMap(int hor, int vert)
         {
             if (hor < 0 || hor > _lngMaps || vert < 0 || vert > _lngMaps)

@@ -38,7 +38,12 @@ namespace CTF_GAME.Controllers
         {
             return GetGameMap(_sizeHor, _sizeVert);
         }
-
+        /// <summary>
+        /// Получаем карту с определенной областью видимости вокруг
+        /// </summary>
+        /// <param name="sizeHori">видимость по горизонтали</param>
+        /// <param name="sizeVert">видимость по вертикали</param>
+        /// <returns></returns>
         public string GetGameMap(int sizeHori, int sizeVert)
         {
             return mapGame.CenterViewMap(sizeHori, sizeVert);

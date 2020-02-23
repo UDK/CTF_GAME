@@ -10,7 +10,7 @@ using System.Linq;
 namespace CTF_GAME.Controllers
 {
     /// <summary>
-    /// Здесь отдаем ответ клиенту
+    /// Посредник между логикой и клиентом, здесь обрабатываем все приходящие сообщения от сервера и ответы от Игрового контроллера
     /// </summary>
     public class CommunicationServer
     {
@@ -19,6 +19,7 @@ namespace CTF_GAME.Controllers
         private GameController gameController;
 
         private NetworkStream networkStreamWithClient;
+
         public CommunicationServer(NetworkStream networkStream)
         {
             gameController = new GameController();
@@ -26,6 +27,9 @@ namespace CTF_GAME.Controllers
             Start();
         }
 
+        /// <summary>
+        /// Ассинхронно стартуем обработку всех приходящих ответов с клиента
+        /// </summary>
         private async void Start()
         {
             Hello();
