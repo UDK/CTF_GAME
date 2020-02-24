@@ -45,5 +45,11 @@ namespace CTF_GAME.Controllers
         {
             ServerSettings.ResponseServerAsync(this.networkStreamWithClient, _helloWorld).GetAwaiter().GetResult();
         }
+
+        private char Cut(string textCommand)
+        {
+
+        }
+
     }
 }

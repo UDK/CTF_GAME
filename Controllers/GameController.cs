@@ -36,7 +36,32 @@ namespace CTF_GAME.Controllers
         /// <returns>Ответ либо карта, либо что-то другое</returns>
         public string HandlerAction(string textAction)
         {
+            Move(textAction);
             return GetGameMap(_sizeHor, _sizeVert);
+            
+        }
+        /// <summary>
+        /// Обработка перемещения
+        /// </summary>
+        /// <param name="textAction">комманда от клиента</param>
+        private void Move(string textAction)
+        {
+            if (textAction == "d")
+            {
+                mapGame.GameHor += 1;
+            }
+            if (textAction == "a")
+            {
+                mapGame.GameHor -= 1;
+            }
+            if (textAction == "w")
+            {
+                mapGame.GameVert -= 1;
+            }
+            if (textAction == "s")
+            {
+                mapGame.GameVert += 1;
+            }
         }
         /// <summary>
         /// Получаем карту с определенной областью видимости вокруг

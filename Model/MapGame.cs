@@ -12,7 +12,8 @@ namespace CTF_GAME.Model
     /// </summary>
     public class MapGame
     {
-
+        const int _lngMaps = 2000;
+        const char _symbolPerson = '0';
         const char _voidMapPoint = '\\';
         /// <summary>
         /// Где находится игрок по вертикали
@@ -23,7 +24,7 @@ namespace CTF_GAME.Model
         /// Где находится игрок по горизонтали
         /// </summary>
         private int gameHor;
-        int GameVert
+        public int GameVert
         {
             get
             {
@@ -31,22 +32,22 @@ namespace CTF_GAME.Model
             }
             set
             {
-                switch (value)
+                if (value < 0)
                 {
-                    case 0:
-                        gameVert = 0;
-                        break;
-                    case _lngMaps:
-                        gameVert = _lngMaps;
-                        break;
-                    default:
-                        gameVert = value;
-                        break;
+                    gameVert = 0;
+                }
+                else if (value > _lngMaps)
+                {
+                    gameVert = _lngMaps;
+                }
+                else
+                {
+                    gameVert = value;
                 }
             }
         }
 
-        int GameHor
+        public int GameHor
         {
             get
             {
@@ -54,22 +55,38 @@ namespace CTF_GAME.Model
             }
             set
             {
-                switch (value)
+                if (value < 0)
                 {
-                    case 0:
-                        gameHor = 0;
-                        break;
-                    case _lngMaps:
-                        gameHor = _lngMaps;
-                        break;
-                    default:
-                        gameHor = value;
-                        break;
+                    gameHor = 0;
                 }
+                else if (value > _lngMaps)
+                {
+                    gameHor = _lngMaps;
+                }
+                else
+                {
+                    gameHor = value;
+                }
+
+
+                //switch (value)
+                //{
+                //    case value < 0:
+                //        gameHor = 0;
+                //        break;
+                //    case _lngMaps:
+                //        gameHor = _lngMaps;
+                //        break;
+                //    default:
+                //        gameHor = value;
+                //        break;
+                //}
             }
+
+
         }
 
-        const int _lngMaps = 2000;
+       
 
         private IObjectGameOnMap[,] mapsObject = new IObjectGameOnMap[_lngMaps, _lngMaps];
 
@@ -109,10 +126,18 @@ namespace CTF_GAME.Model
             {
                 return _voidMapPoint;
             }
+            else if(hor == GameHor && vert == GameVert)
+            {
+                return _symbolPerson;
+            }
             else
             {
                 return (char)mapsObject[hor, vert].GetASCII;
             }
+
+
+            
+
         }
     }
 }
