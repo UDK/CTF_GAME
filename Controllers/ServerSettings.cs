@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using CTF_GAME;
+using CTF_GAME.Model.ModelForEvent;
 
 namespace CTF_GAME.Controllers
 {
@@ -43,12 +44,22 @@ namespace CTF_GAME.Controllers
         /// <param name="tcpServer">Настроенный tcp-сервер</param>
         private void StartServer(TcpListener tcpServer)
         {
+            int ID = 0;
             tcpServer.Start();
             while (true)
             {
-                tcpClients.Add(new CommunicationServer(tcpServer.AcceptTcpClient().GetStream()));
+                var newClient = new CommunicationServer(tcpServer.AcceptTcpClient().GetStream());
+                newClient.networkClose += DeleteClosedNetwork;
+                tcpClients.Add(newClient);
+                ID++;
             }
         }
+
+        private void DeleteClosedNetwork(object sender, EventArgsNetworkClose args )
+        {
+            tcpClients.RemoveAt(args.ID);
+        }
+
         /// <summary>
         /// Ассинхронно читаем, что прислал клиент
         /// </summary>

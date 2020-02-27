@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using CTF_GAME.Model.ModelForEvent;
 
 namespace CTF_GAME.Controllers
 {
@@ -14,6 +15,12 @@ namespace CTF_GAME.Controllers
     /// </summary>
     public class CommunicationServer
     {
+        public delegate void ClientNetworkClose(object sender, EventArgsNetworkClose args);
+
+        public event ClientNetworkClose networkClose;
+
+        private int ID { get; set; }
+
         const string _helloWorld = " #     # ###    ######                                                                        \n #     #  #     #     # #####   ####         #    # #  ####  ######    #####  #  ####  #    # \n #     #  #     #     # #    # #    #        ##   # # #    # #         #    # # #    # #   #  \n #######  #     ######  #    # #    #        # #  # # #      #####     #    # # #      ####   \n #     #  #     #     # #####  #    # ###    #  # # # #      #         #    # # #      #  #   \n #     #  #     #     # #   #  #    # ###    #   ## # #    # #         #    # # #    # #   #  \n #     # ###    ######  #    #  ####   #     #    # #  ####  ######    #####  #  ####  #    # \n";
 
         private GameController gameController;
@@ -35,9 +42,19 @@ namespace CTF_GAME.Controllers
             Hello();
             while (true)
             {
-                string responseOfClient = await ServerSettings.ReadServerAsync(networkStreamWithClient);
-                string response = gameController.HandlerAction(responseOfClient);
-                await ServerSettings.ResponseServerAsync(networkStreamWithClient, response);
+                try
+                {
+                    string responseOfClient = await ServerSettings.ReadServerAsync(networkStreamWithClient);
+                    string response = gameController.HandlerAction(Cut(responseOfClient));
+                    await ServerSettings.ResponseServerAsync(networkStreamWithClient, response);
+                }
+                catch (IOException)
+                {
+                    this.networkStreamWithClient.Dispose();
+                    this.networkStreamWithClient.Close();
+                    networkClose(this, new EventArgsNetworkClose(this.ID));
+                    break;
+                }
             }
         }
 
@@ -45,5 +62,11 @@ namespace CTF_GAME.Controllers
         {
             ServerSettings.ResponseServerAsync(this.networkStreamWithClient, _helloWorld).GetAwaiter().GetResult();
         }
+
+        private string Cut(string textCommand)
+        {
+            return textCommand.Substring(0, textCommand.IndexOf('\n'));
+        }
+
     }
 }
