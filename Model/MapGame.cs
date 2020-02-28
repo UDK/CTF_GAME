@@ -120,7 +120,7 @@ namespace CTF_GAME.Model
         /// <param name="hor">точка по горизонтали</param>
         /// <param name="vert">точка по вертикали</param>
         /// <returns>полученный ответ</returns>
-        private char GetCharPointMap(int hor, int vert)
+        public char GetCharPointMap(int hor, int vert)
         {
             if (hor < 0 || hor > _lngMaps || vert < 0 || vert > _lngMaps)
             {
@@ -134,10 +134,18 @@ namespace CTF_GAME.Model
             {
                 return (char)mapsObject[hor, vert].GetASCII;
             }
-
-
-            
-
         }
+        public IObjectGameOnMap GetObjectPointMap(int hor, int vert)
+        {
+            if (hor < 0 || hor > _lngMaps || vert < 0 || vert > _lngMaps)
+            {
+                return null;
+            }
+            else
+            {
+                return mapsObject[hor, vert];
+            }
+        }
+
     }
 }

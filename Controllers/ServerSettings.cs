@@ -57,7 +57,8 @@ namespace CTF_GAME.Controllers
 
         private void DeleteClosedNetwork(object sender, EventArgsNetworkClose args )
         {
-            tcpClients.RemoveAt(args.ID);
+            tcpClients[args.ID].networkStreamWithClient.Close();
+             tcpClients.RemoveAt(args.ID);
         }
 
         /// <summary>

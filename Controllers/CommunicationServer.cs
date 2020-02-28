@@ -25,7 +25,7 @@ namespace CTF_GAME.Controllers
 
         private GameController gameController;
 
-        private NetworkStream networkStreamWithClient;
+        public NetworkStream networkStreamWithClient { get; set; }
 
         public CommunicationServer(NetworkStream networkStream)
         {
@@ -50,8 +50,8 @@ namespace CTF_GAME.Controllers
                 }
                 catch (IOException)
                 {
-                    this.networkStreamWithClient.Dispose();
-                    this.networkStreamWithClient.Close();
+                    //this.networkStreamWithClient.Dispose();
+                    //this.networkStreamWithClient.Close();
                     networkClose(this, new EventArgsNetworkClose(this.ID));
                     break;
                 }
