@@ -22,11 +22,12 @@ namespace CTF_GAME.Controllers
         /// </summary>
         const int _sizeVert = 50;
 
-        public MapGame mapGame { get; private set; }
+        MapGame mapGame;
+        public MapGame MapGame { get => mapGame; private set=> this.mapGame = value; }
         public GameController()
         {
-            mapGame = new MapGame();
-            mapGame.Initialization(new FieldGameOnMap(100, false));
+            MapGame = new MapGame();
+            MapGame.Initialization(new FieldGameOnMap(100, false));
         }
 
         /// <summary>
@@ -36,32 +37,10 @@ namespace CTF_GAME.Controllers
         /// <returns>Ответ либо карта, либо что-то другое</returns>
         public string HandlerAction(string textAction)
         {
-            Move(textAction);
+            IObjectGameOnMap gameObject = MapGame.GetObjectPointMap(MapGame.GameHor, MapGame.GameVert);
+            gameObject.Action(ref this.mapGame, textAction);
             return GetGameMap(_sizeHor, _sizeVert);
-            
-        }
-        /// <summary>
-        /// Обработка перемещения
-        /// </summary>
-        /// <param name="textAction">комманда от клиента</param>
-        private void Move(string textAction)
-        {
-            if (textAction == "d")
-            {
-                mapGame.GameHor += 1;
-            }
-            if (textAction == "a")
-            {
-                mapGame.GameHor -= 1;
-            }
-            if (textAction == "w")
-            {
-                mapGame.GameVert -= 1;
-            }
-            if (textAction == "s")
-            {
-                mapGame.GameVert += 1;
-            }
+
         }
         /// <summary>
         /// Получаем карту с определенной областью видимости вокруг
@@ -71,7 +50,7 @@ namespace CTF_GAME.Controllers
         /// <returns></returns>
         public string GetGameMap(int sizeHori, int sizeVert)
         {
-            return mapGame.CenterViewMap(sizeHori, sizeVert);
+            return MapGame.CenterViewMap(sizeHori, sizeVert);
         }
     }
 }

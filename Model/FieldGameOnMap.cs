@@ -37,9 +37,37 @@ namespace CTF_GAME.Model
             }
         }
 
+        public void Action(ref MapGame mapGame, string textAction)
+        {
+            Move(ref mapGame, textAction);
+        }
+
         int IObjectGameOnMap.GetRandom()
         {
             return 100;
+        }
+        /// <summary>
+        /// Обработка перемещения
+        /// </summary>
+        /// <param name="textAction">комманда от клиента</param>
+        private void Move(ref MapGame mapGame, string textAction)
+        {
+            if (textAction == "d")
+            {
+                mapGame.GameHor += 1;
+            }
+            if (textAction == "a")
+            {
+                mapGame.GameHor -= 1;
+            }
+            if (textAction == "w")
+            {
+                mapGame.GameVert -= 1;
+            }
+            if (textAction == "s")
+            {
+                mapGame.GameVert += 1;
+            }
         }
     }
 }

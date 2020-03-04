@@ -20,5 +20,7 @@ namespace CTF_GAME.Model
         /// </summary>
         /// <returns>Представление объекта на карте, в виде ASCII кода</returns>
         public byte GetASCII { get; }
+
+        public void Action(ref MapGame mapGame, string textAction);
     }
 }
