@@ -7,7 +7,7 @@ namespace CTF_GAME.Model
 {
     public class RandomAppear
     {
-
+        
         private bool appearOnce { get; set; }
 
         private int changeAppereance { get; set; }
