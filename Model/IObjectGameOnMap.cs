@@ -10,7 +10,6 @@ namespace CTF_GAME.Model
     /// </summary>
     public interface IObjectGameOnMap
     {
-
         /// <summary>
         /// Класс работы с рандомом
         /// </summary>
