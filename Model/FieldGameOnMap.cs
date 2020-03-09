@@ -37,9 +37,10 @@ namespace CTF_GAME.Model
             }
         }
 
-        public void Action(ref MapGame mapGame, string textAction)
+        public string Action(ref MapGame mapGame, string textAction)
         {
             Move(ref mapGame, textAction);
+            return mapGame.CenterViewMap();
         }
 
         int IObjectGameOnMap.GetRandom()

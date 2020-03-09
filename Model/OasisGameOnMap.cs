@@ -26,7 +26,7 @@ namespace CTF_GAME.Model
 
         public string Action(ref MapGame mapGame, string textAction)
         {
-            throw new NotImplementedException();
+            return "flag_ctf{govno}";
         }
 
         public int GetRandom()
