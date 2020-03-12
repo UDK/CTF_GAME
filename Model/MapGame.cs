@@ -103,9 +103,9 @@ namespace CTF_GAME.Model
 
         private IObjectGameOnMap[,] mapsObject = new IObjectGameOnMap[_lngMaps, _lngMaps];
 
-        public void Initialization(params IObjectGameOnMap[] obj)
+        public async void Initialization(params IObjectGameOnMap[] obj)
         {
-            InitializationRandomObject(obj);
+            await Task.Run(()=>InitializationRandomObject(obj));
         }
 
         private void InitializationRandomObject(IObjectGameOnMap[] obj)
