@@ -29,9 +29,10 @@ namespace CTF_GAME.Model
             return "flag_ctf{govno}";
         }
 
-        public int GetRandom()
+        public ChangeAppearObjectMap GetRandom()
         {
-            throw new NotImplementedException();
+            ChangeAppearObjectMap objChange = new ChangeAppearObjectMap() { changeRandom = 0, typeRandom = TypeRandom.UniqueRandom };
+            return objChange;
         }
     }
 }

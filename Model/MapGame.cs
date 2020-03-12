@@ -105,15 +105,49 @@ namespace CTF_GAME.Model
 
         public void Initialization(params IObjectGameOnMap[] obj)
         {
+            InitializationRandomObject(obj);
+        }
+
+        private void InitializationRandomObject(IObjectGameOnMap[] obj)
+        {
+            List<IObjectGameOnMap> objRepeating = obj.Where(ob => ob.GetRandom().typeRandom == TypeRandom.RepeatingRandom).ToList();
             for (int vert = 0; vert < mapsObject.GetLength(1); vert++)
             {
                 for (int hor = 0; hor < mapsObject.GetLength(0); hor++)
                 {
-                    //Тестовый вариант, мб для этого стоит сделать ветку с dev. Надо будет заменить с рандомным выпадением
-                    mapsObject[hor, vert] = obj[0];
+                    mapsObject[hor, vert] = ChoiceRandomObject(ref objRepeating);
                 }
             }
+            List<IObjectGameOnMap> objUnique = obj.Where(ob => ob.GetRandom().typeRandom == TypeRandom.UniqueRandom).ToList();
+            foreach (var obUnique in objUnique)
+            {
+                Random random = new Random();
+                mapsObject[random.Next(0, _lngMaps), random.Next(0, _lngMaps)] = obUnique;
+            }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj">Передаю по ссылке, чтобы работало быстрее</param>
+        /// <returns></returns>
+        private IObjectGameOnMap ChoiceRandomObject(ref List<IObjectGameOnMap> obj)
+        {
+            Random randomChange = new Random();
+            IObjectGameOnMap objectGameOnMapBestRandom = null;
+            int BestNumberRandom = -1;
+            foreach (var ob in obj)
+            {
+                int randomIntChange = randomChange.Next(0, ob.GetRandom().changeRandom);
+                if (BestNumberRandom < randomIntChange)
+                {
+                    objectGameOnMapBestRandom = ob;
+                    BestNumberRandom = randomIntChange;
+                }
+            }
+            return objectGameOnMapBestRandom;
+        }
+
         public string CenterViewMap(int conclusionLenghtZoneHor = _sizeHor, int conclusionLenghtZoneVert = _sizeVert)
         {
             StringBuilder viewMap = new StringBuilder();
@@ -139,7 +173,7 @@ namespace CTF_GAME.Model
             {
                 return _voidMapPoint;
             }
-            else if(hor == GameHor && vert == GameVert)
+            else if (hor == GameHor && vert == GameVert)
             {
                 return _symbolPerson;
             }
