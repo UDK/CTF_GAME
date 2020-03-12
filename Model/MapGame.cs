@@ -148,12 +148,6 @@ namespace CTF_GAME.Model
                 return (char)mapsObject[hor, vert].GetASCII;
             }
         }
-        /// <summary>
-        /// Получаем IObjectGameOnMap с указанной точки на карте
-        /// </summary>
-        /// <param name="hor">точка по горизонтали</param>
-        /// <param name="vert">точка по вертикали</param>
-        /// <returns>полученный ответ</returns>
         public IObjectGameOnMap GetObjectPointMap(int hor, int vert)
         {
             if (hor < 0 || hor > _lngMaps || vert < 0 || vert > _lngMaps)
