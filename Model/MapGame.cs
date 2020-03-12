@@ -82,20 +82,6 @@ namespace CTF_GAME.Model
                 {
                     gameHor = value;
                 }
-
-
-                //switch (value)
-                //{
-                //    case value < 0:
-                //        gameHor = 0;
-                //        break;
-                //    case _lngMaps:
-                //        gameHor = _lngMaps;
-                //        break;
-                //    default:
-                //        gameHor = value;
-                //        break;
-                //}
             }
 
 
