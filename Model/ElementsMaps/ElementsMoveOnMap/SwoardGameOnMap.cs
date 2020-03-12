@@ -30,9 +30,10 @@ namespace CTF_GAME.Model
             return message + mapGame.CenterViewMap();
         }
 
-        public int GetRandom()
+        public override ChangeAppearObjectMap GetRandom()
         {
-            throw new NotImplementedException();
+            ChangeAppearObjectMap objChange = new ChangeAppearObjectMap() { changeRandom = 0, typeRandom = TypeRandom.UniqueRandom };
+            return objChange;
         }
     }
 }

@@ -9,17 +9,16 @@ namespace CTF_GAME.Model
     {
         private char ASCII = '~';
 
-
-        RandomAppear random;
-
         /// <summary>
         /// 
         /// </summary>
         /// <param name="change">Шанс появление объект карты значение от 1 до 99</param>
         /// <param name="uniqueness">Уникальность, встретится объект карты единожды(true) или несколько раз(false)</param>
-        public FieldGameOnMap(int change, bool uniqueness)
+        public override ChangeAppearObjectMap GetRandom()
         {
-            this.random = new RandomAppear(uniqueness, change);
+            //МБ стоит вынести в абстрактный класс или куда выше, но времени нет
+            ChangeAppearObjectMap objChange = new ChangeAppearObjectMap() { typeRandom = TypeRandom.RepeatingRandom, changeRandom = 90 };
+            return objChange;
         }
 
         public override byte GetASCII

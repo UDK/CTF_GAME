@@ -18,7 +18,7 @@ namespace CTF_GAME.Controllers
         public GameController()
         {
             MapGame = new MapGame();
-            MapGame.Initialization(new FieldGameOnMap(100, false));
+            MapGame.Initialization(new FieldGameOnMap(), new OasisGameOnMap(), new SwoardGameOnMap());
         }
 
         /// <summary>

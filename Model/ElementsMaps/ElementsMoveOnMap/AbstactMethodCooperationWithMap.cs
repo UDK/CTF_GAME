@@ -10,11 +10,7 @@ namespace CTF_GAME.Model
         public abstract byte GetASCII { get; }
 
         public abstract string Action(ref MapGame mapGame, string textAction);
-
-        public int GetRandom()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract ChangeAppearObjectMap GetRandom();
 
         /// <summary>
         /// Обработка перемещения

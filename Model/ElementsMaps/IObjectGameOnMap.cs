@@ -11,9 +11,9 @@ namespace CTF_GAME.Model
     public interface IObjectGameOnMap
     {
         /// <summary>
-        /// Класс работы с рандомом
+        /// Метод 
         /// </summary>
-        int GetRandom();
+        public ChangeAppearObjectMap GetRandom();
         /// <summary>
         /// Возвращает ASCII представление объекта
         /// </summary>
