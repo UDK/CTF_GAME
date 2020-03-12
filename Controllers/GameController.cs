@@ -12,15 +12,6 @@ namespace CTF_GAME.Controllers
     /// </summary>
     public class GameController
     {
-        /// <summary>
-        /// Размер выводимой карты по горизонтали
-        /// </summary>
-        const int _sizeHor = 100;
-
-        /// <summary>
-        /// Размер выводимой карты по вертикали
-        /// </summary>
-        const int _sizeVert = 50;
 
         MapGame mapGame;
         public MapGame MapGame { get => mapGame; private set=> this.mapGame = value; }
@@ -38,8 +29,8 @@ namespace CTF_GAME.Controllers
         public string HandlerAction(string textAction)
         {
             IObjectGameOnMap gameObject = MapGame.GetObjectPointMap(MapGame.GameHor, MapGame.GameVert);
-            gameObject.Action(ref this.mapGame, textAction);
-            return GetGameMap(_sizeHor, _sizeVert);
+            return gameObject.Action(ref this.mapGame, textAction);
+            //return GetGameMap(_sizeHor, _sizeVert);
 
         }
         /// <summary>

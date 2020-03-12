@@ -12,14 +12,30 @@ namespace CTF_GAME.Model
     /// </summary>
     public class MapGame
     {
+        /// <summary>
+        /// Размер выводимой карты по горизонтали
+        /// </summary>
+        const int _sizeHor = 100;
+        /// <summary>
+        /// Размер выводимой карты по вертикали
+        /// </summary>
+        const int _sizeVert = 50;
+        /// <summary>
+        /// Максимальный размер карты
+        /// </summary>
         const int _lngMaps = 2000;
+        /// <summary>
+        /// Символ персонажа
+        /// </summary>
         const char _symbolPerson = '0';
+        /// <summary>
+        /// Символ конца карты
+        /// </summary>
         const char _voidMapPoint = '\\';
         /// <summary>
         /// Где находится игрок по вертикали
         /// </summary>
         private int gameVert;
-
         /// <summary>
         /// Где находится игрок по горизонтали
         /// </summary>
@@ -46,7 +62,6 @@ namespace CTF_GAME.Model
                 }
             }
         }
-
         public int GameHor
         {
             get
@@ -67,26 +82,24 @@ namespace CTF_GAME.Model
                 {
                     gameHor = value;
                 }
-
-
-                //switch (value)
-                //{
-                //    case value < 0:
-                //        gameHor = 0;
-                //        break;
-                //    case _lngMaps:
-                //        gameHor = _lngMaps;
-                //        break;
-                //    default:
-                //        gameHor = value;
-                //        break;
-                //}
             }
 
 
         }
 
-       
+
+        IObjectGameOnMap this[int hor, int vert]
+        {
+            get
+            {
+                return this.mapsObject[hor, vert];
+            }
+            set
+            {
+                this.mapsObject[hor, vert] = value;
+            }
+        }
+
 
         private IObjectGameOnMap[,] mapsObject = new IObjectGameOnMap[_lngMaps, _lngMaps];
 
@@ -101,7 +114,7 @@ namespace CTF_GAME.Model
                 }
             }
         }
-        public string CenterViewMap(int conclusionLenghtZoneHor, int conclusionLenghtZoneVert)
+        public string CenterViewMap(int conclusionLenghtZoneHor = _sizeHor, int conclusionLenghtZoneVert = _sizeVert)
         {
             StringBuilder viewMap = new StringBuilder();
             for (int vert = -conclusionLenghtZoneVert / 2; vert < conclusionLenghtZoneVert / 2; vert++)

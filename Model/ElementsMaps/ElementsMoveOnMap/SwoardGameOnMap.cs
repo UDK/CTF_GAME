@@ -5,17 +5,18 @@ using System.Threading.Tasks;
 
 namespace CTF_GAME.Model
 {
-    public class OasisGameOnMap : IObjectGameOnMap
+    public class SwoardGameOnMap : AbstactMethodCooperationWithMap
     {
-        private char ASCII = '8';
-
-        public byte GetASCII
+        private const string message = "WOW, this big and very powerful sword. I will have been hoping to me\n";
+        private char ASCII = '|';
+        public override byte GetASCII
         {
             get
             {
                 try
                 {
                     return (byte)ASCII;
+
                 }
                 catch
                 {
@@ -23,10 +24,10 @@ namespace CTF_GAME.Model
                 }
             }
         }
-
-        public string Action(ref MapGame mapGame, string textAction)
+        public override string Action(ref MapGame mapGame, string textAction)
         {
-            throw new NotImplementedException();
+            Move(ref mapGame, textAction);
+            return message + mapGame.CenterViewMap();
         }
 
         public int GetRandom()

@@ -50,8 +50,6 @@ namespace CTF_GAME.Controllers
                 }
                 catch (IOException)
                 {
-                    //this.networkStreamWithClient.Dispose();
-                    //this.networkStreamWithClient.Close();
                     networkClose(this, new EventArgsNetworkClose(this.ID));
                     break;
                 }
