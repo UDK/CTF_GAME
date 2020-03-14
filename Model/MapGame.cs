@@ -15,15 +15,15 @@ namespace CTF_GAME.Model
         /// <summary>
         /// Размер выводимой карты по горизонтали
         /// </summary>
-        const int _sizeHor = 100;
+        int _sizeHor { get; set; }
         /// <summary>
         /// Размер выводимой карты по вертикали
         /// </summary>
-        const int _sizeVert = 50;
+        int _sizeVert { get; set; }
         /// <summary>
         /// Максимальный размер карты
         /// </summary>
-        const int _lngMaps = 2000;
+        int _lngMaps;
         /// <summary>
         /// Символ персонажа
         /// </summary>
@@ -52,9 +52,9 @@ namespace CTF_GAME.Model
                 {
                     gameVert = 0;
                 }
-                else if (value > _lngMaps)
+                else if (value >= _lngMaps)
                 {
-                    gameVert = _lngMaps;
+                    gameVert = gameVert;
                 }
                 else
                 {
@@ -74,9 +74,9 @@ namespace CTF_GAME.Model
                 {
                     gameHor = 0;
                 }
-                else if (value > _lngMaps)
+                else if (value >= _lngMaps)
                 {
-                    gameHor = _lngMaps;
+                    gameHor = gameHor;
                 }
                 else
                 {
@@ -87,6 +87,22 @@ namespace CTF_GAME.Model
 
         }
 
+        public int LnghtMaps
+        {
+            get => _lngMaps;
+            set
+            {
+                if (value <= _sizeVert)
+                {
+                    _sizeVert = value - 1;
+                }
+                if (value <= _sizeHor)
+                {
+                    _sizeHor = value - 1;
+                }
+                _lngMaps = value;
+            }
+        }
 
         IObjectGameOnMap this[int hor, int vert]
         {
@@ -100,12 +116,19 @@ namespace CTF_GAME.Model
             }
         }
 
+        public MapGame(int lenghtMaps = 2000, int sizeViewHor = 100, int sizeViewVert = 50)
+        {
+            _sizeHor = sizeViewHor;
+            _sizeVert = sizeViewVert;
+            LnghtMaps = lenghtMaps;
+            this.mapsObject = new IObjectGameOnMap[LnghtMaps, LnghtMaps];
+        }
 
-        private IObjectGameOnMap[,] mapsObject = new IObjectGameOnMap[_lngMaps, _lngMaps];
+        private IObjectGameOnMap[,] mapsObject;
 
         public async void Initialization(params IObjectGameOnMap[] obj)
         {
-            await Task.Run(()=>InitializationRandomObject(obj));
+            await Task.Run(() => InitializationRandomObject(obj));
         }
 
         private void InitializationRandomObject(IObjectGameOnMap[] obj)
@@ -148,8 +171,9 @@ namespace CTF_GAME.Model
             return objectGameOnMapBestRandom;
         }
 
-        public string CenterViewMap(int conclusionLenghtZoneHor = _sizeHor, int conclusionLenghtZoneVert = _sizeVert)
+        public string CenterViewMap()
         {
+            int conclusionLenghtZoneHor = _sizeHor, conclusionLenghtZoneVert = _sizeVert;
             StringBuilder viewMap = new StringBuilder();
             for (int vert = -conclusionLenghtZoneVert / 2; vert < conclusionLenghtZoneVert / 2; vert++)
             {
@@ -169,7 +193,7 @@ namespace CTF_GAME.Model
         /// <returns>полученный ответ</returns>
         public char GetCharPointMap(int hor, int vert)
         {
-            if (hor < 0 || hor > _lngMaps || vert < 0 || vert > _lngMaps)
+            if (hor < 0 || hor >= _lngMaps || vert < 0 || vert >= _lngMaps)
             {
                 return _voidMapPoint;
             }
@@ -184,7 +208,7 @@ namespace CTF_GAME.Model
         }
         public IObjectGameOnMap GetObjectPointMap(int hor, int vert)
         {
-            if (hor < 0 || hor > _lngMaps || vert < 0 || vert > _lngMaps)
+            if (hor < 0 || hor >= _lngMaps || vert < 0 || vert >= _lngMaps)
             {
                 return null;
             }

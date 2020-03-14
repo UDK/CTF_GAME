@@ -17,7 +17,7 @@ namespace CTF_GAME.Controllers
         public MapGame MapGame { get => mapGame; private set=> this.mapGame = value; }
         public GameController()
         {
-            MapGame = new MapGame();
+            MapGame = new MapGame(30);
             MapGame.Initialization(new FieldGameOnMap(), new OasisGameOnMap(), new SwoardGameOnMap());
         }
 
@@ -41,7 +41,7 @@ namespace CTF_GAME.Controllers
         /// <returns></returns>
         public string GetGameMap(int sizeHori, int sizeVert)
         {
-            return MapGame.CenterViewMap(sizeHori, sizeVert);
+            return MapGame.CenterViewMap();
         }
     }
 }
