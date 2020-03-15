@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CTF_GAME.Model.Exception;
 
 namespace CTF_GAME.Model
 {
@@ -25,6 +26,11 @@ namespace CTF_GAME.Model
         }
 
         public string Action(ref MapGame mapGame, string textAction)
+        {
+            throw new GameEndException("Thanks for the game, Wanderer");
+        }
+
+        public string EventStepOnGameObcject(string textAction)
         {
             return "flag_ctf{govno}";
         }

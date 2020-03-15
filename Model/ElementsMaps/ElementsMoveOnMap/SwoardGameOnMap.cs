@@ -27,13 +27,17 @@ namespace CTF_GAME.Model
         public override string Action(ref MapGame mapGame, string textAction)
         {
             Move(ref mapGame, textAction);
-            return message + mapGame.CenterViewMap();
+            return mapGame.CenterViewMap();
         }
 
         public override ChangeAppearObjectMap GetRandom()
         {
             ChangeAppearObjectMap objChange = new ChangeAppearObjectMap() { changeRandom = 0, typeRandom = TypeRandom.UniqueRandom };
             return objChange;
+        }
+        public override string EventStepOnGameObcject(string textAction)
+        {
+            return message;
         }
     }
 }
