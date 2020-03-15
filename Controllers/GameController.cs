@@ -30,7 +30,6 @@ namespace CTF_GAME.Controllers
         {
             IObjectGameOnMap gameObject = MapGame.GetObjectPointMap(MapGame.GameHor, MapGame.GameVert);
             return gameObject.Action(ref this.mapGame, textAction);
-            //return GetGameMap(_sizeHor, _sizeVert);
 
         }
         /// <summary>
