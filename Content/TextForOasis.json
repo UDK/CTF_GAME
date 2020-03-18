@@ -1,0 +1,12 @@
+{
+  "Q": "Hi there, i'm monster this is desert. Why did you came here?",
+  "A": {
+    "1": { "R": "I have came to here, because me need flag",
+      "Q": "OK, then answer questions",
+      "A": {
+
+      }
+    },
+    "2": "Sorry, i guess I'm in the wrong place."
+  }
+}
