@@ -28,9 +28,9 @@ namespace CTF_GAME.Controllers
         /// <returns>Ответ либо карта, либо что-то другое</returns>
         public string HandlerAction(string textAction)
         {
-            IObjectGameOnMap gameObject = MapGame.GetObjectPointMap(MapGame.GameHor, MapGame.GameVert);
-            return gameObject.Action(ref this.mapGame, textAction);
-
+            string actionResponse = MapGame.GetObjectPointMap(MapGame.GameHor, MapGame.GameVert).Action(ref this.mapGame, textAction);
+            string eventResponse = MapGame.GetObjectPointMap(MapGame.GameHor, MapGame.GameVert).EventStepOnGameObcject(textAction);
+            return actionResponse + '\n' + eventResponse;
         }
         /// <summary>
         /// Получаем карту с определенной областью видимости вокруг

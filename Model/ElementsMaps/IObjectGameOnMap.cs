@@ -27,5 +27,12 @@ namespace CTF_GAME.Model
         /// <param name="textAction"></param>
         /// <returns></returns>
         public string Action(ref MapGame mapGame, string textAction);
+
+        /// <summary>
+        /// Событие происходящее при наступлении на этот объект игроком(сразу)
+        /// </summary>
+        /// <param name="textAction"></param>
+        /// <returns></returns>
+        public string EventStepOnGameObcject(string textAction);
     }
 }

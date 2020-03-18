@@ -10,6 +10,12 @@ namespace CTF_GAME.Model
         public abstract byte GetASCII { get; }
 
         public abstract string Action(ref MapGame mapGame, string textAction);
+
+        public virtual string EventStepOnGameObcject(string textAction)
+        {
+            return null;
+        }
+
         public abstract ChangeAppearObjectMap GetRandom();
 
         /// <summary>

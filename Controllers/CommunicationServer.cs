@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using CTF_GAME.Model.ModelForEvent;
+using CTF_GAME.Model.Exception;
 
 namespace CTF_GAME.Controllers
 {
@@ -50,6 +51,12 @@ namespace CTF_GAME.Controllers
                 }
                 catch (IOException)
                 {
+                    networkClose(this, new EventArgsNetworkClose(this.ID));
+                    break;
+                }
+                catch(GameEndException e)
+                {
+                    await ServerSettings.ResponseServerAsync(networkStreamWithClient, e.Message);
                     networkClose(this, new EventArgsNetworkClose(this.ID));
                     break;
                 }
