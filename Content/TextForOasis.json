@@ -2,7 +2,7 @@
   "Q": "Hi there, i'm monster this is desert. Why did you came here?",
   "A": {
     "1": { "R": "I have came to here, because me need flag",
-      "Q": "OK, then answer questions",
+      "Q": "OK, then answer questions\n",
       "A": {
 
       }
