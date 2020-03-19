@@ -18,21 +18,11 @@ namespace CTF_GAME.Controllers
     {
         const int _timeOutGetData = 5000;
         const int _lenghtBuffer = 1024;
-        private int _port = 9090;
-        private IPAddress _ipAddress = IPAddress.Parse("127.0.0.1");
         List<CommunicationServer> tcpClients = new List<CommunicationServer>();
 
-        public int Port
-        {
-            get => _port;
-            set => _port = value;
-        }
+        public int Port { get; set; } = 8080;
 
-        public IPAddress IpAddr
-        {
-            get => _ipAddress;
-            set => _ipAddress = value;
-        }
+        public IPAddress IpAddr { get; set; } = IPAddress.Parse("0.0.0.0");
 
         public ServerSettings()
         {
