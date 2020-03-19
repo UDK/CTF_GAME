@@ -4,3 +4,4 @@ appsettings.json
 obj/
 .vs/
 .vscode/
+*csproj.user
