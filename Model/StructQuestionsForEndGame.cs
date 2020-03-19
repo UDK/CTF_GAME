@@ -18,10 +18,10 @@ namespace CTF_GAME.Model
 
         public string[] arAnswer { get;private set; }
 
-        public bool CheckAnswer(int option)
-        {
-            if(goodAnswer)
-        }
+        //public bool CheckAnswer(int option)
+        //{
+        //    if(goodAnswer)
+        //}
 
     }
 }
