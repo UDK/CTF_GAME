@@ -54,7 +54,7 @@ namespace CTF_GAME.Controllers
                     networkClose(this, new EventArgsNetworkClose(this.ID));
                     break;
                 }
-                catch(GameEndException e)
+                catch (GameEndException e)
                 {
                     await ServerSettings.ResponseServerAsync(networkStreamWithClient, e.Message);
                     networkClose(this, new EventArgsNetworkClose(this.ID));
@@ -70,7 +70,8 @@ namespace CTF_GAME.Controllers
 
         private string Cut(string textCommand)
         {
-            return textCommand.Substring(0, textCommand.IndexOf('\n'));
+            int indexCut = textCommand.IndexOf('\n');
+            return textCommand.Substring(0, indexCut == -1 ? throw new IOException() : indexCut);
         }
 
     }
