@@ -11,7 +11,7 @@ namespace CTF_GAME.Model
 
         public abstract string Action(ref MapGame mapGame, string textAction);
 
-        public virtual string EventStepOnGameObcject(string textAction)
+        public virtual string EventStepOnGameObject(string textAction)
         {
             return null;
         }

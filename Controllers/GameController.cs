@@ -29,7 +29,7 @@ namespace CTF_GAME.Controllers
         public string HandlerAction(string textAction)
         {
             string actionResponse = MapGame.GetObjectPointMap(MapGame.GameHor, MapGame.GameVert).Action(ref this.mapGame, textAction);
-            string eventResponse = MapGame.GetObjectPointMap(MapGame.GameHor, MapGame.GameVert).EventStepOnGameObcject(textAction);
+            string eventResponse = MapGame.GetObjectPointMap(MapGame.GameHor, MapGame.GameVert).EventStepOnGameObject(textAction);
             return actionResponse + '\n' + eventResponse;
         }
         /// <summary>

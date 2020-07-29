@@ -30,7 +30,7 @@ namespace CTF_GAME.Model
             throw new GameEndException("Thanks for the game, Wanderer");
         }
 
-        public string EventStepOnGameObcject(string textAction)
+        public string EventStepOnGameObject(string textAction)
         {
             return "flag_ctf{govno}";
         }

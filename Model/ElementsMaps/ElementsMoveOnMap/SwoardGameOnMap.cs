@@ -35,7 +35,7 @@ namespace CTF_GAME.Model
             ChangeAppearObjectMap objChange = new ChangeAppearObjectMap() { changeRandom = 0, typeRandom = TypeRandom.UniqueRandom };
             return objChange;
         }
-        public override string EventStepOnGameObcject(string textAction)
+        public override string EventStepOnGameObject(string textAction)
         {
             return message;
         }

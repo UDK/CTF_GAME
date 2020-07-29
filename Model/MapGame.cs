@@ -131,16 +131,34 @@ namespace CTF_GAME.Model
             await Task.Run(() => InitializationRandomObject(obj));
         }
 
+        /// <summary>
+        /// Инициализация объектов на карте
+        /// </summary>
+        /// <param name="obj"></param>
         private void InitializationRandomObject(IObjectGameOnMap[] obj)
+        {
+            PlacementRepeatingObjectMaps(obj);
+            PlacementUniqueObjectMaps(obj);
+        }
+
+        private void PlacementRepeatingObjectMaps(IObjectGameOnMap[] obj)
         {
             List<IObjectGameOnMap> objRepeating = obj.Where(ob => ob.GetRandom().typeRandom == TypeRandom.RepeatingRandom).ToList();
             for (int vert = 0; vert < mapsObject.GetLength(1); vert++)
             {
                 for (int hor = 0; hor < mapsObject.GetLength(0); hor++)
                 {
-                    mapsObject[hor, vert] = ChoiceRandomObject(ref objRepeating);
+                    mapsObject[hor, vert] = ChoiceRandomObject(objRepeating);
                 }
             }
+        }
+
+        /// <summary>
+        /// Расстановка уникальных объектов на карте
+        /// </summary>
+        /// <param name="obj"></param>
+        private void PlacementUniqueObjectMaps(IObjectGameOnMap[] obj)
+        {
             List<IObjectGameOnMap> objUnique = obj.Where(ob => ob.GetRandom().typeRandom == TypeRandom.UniqueRandom).ToList();
             foreach (var obUnique in objUnique)
             {
@@ -152,9 +170,9 @@ namespace CTF_GAME.Model
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="obj">Передаю по ссылке, чтобы работало быстрее</param>
+        /// <param name="obj">массив объектов для карты</param>
         /// <returns></returns>
-        private IObjectGameOnMap ChoiceRandomObject(ref List<IObjectGameOnMap> obj)
+        private IObjectGameOnMap ChoiceRandomObject(List<IObjectGameOnMap> obj)
         {
             Random randomChange = new Random();
             IObjectGameOnMap objectGameOnMapBestRandom = null;
@@ -171,6 +189,10 @@ namespace CTF_GAME.Model
             return objectGameOnMapBestRandom;
         }
 
+        /// <summary>
+        /// Получить центр карты относительно игрока
+        /// </summary>
+        /// <returns></returns>
         public string CenterViewMap()
         {
             int conclusionLenghtZoneHor = _sizeHor, conclusionLenghtZoneVert = _sizeVert;
