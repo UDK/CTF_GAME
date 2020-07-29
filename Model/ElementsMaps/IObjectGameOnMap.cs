@@ -33,6 +33,6 @@ namespace CTF_GAME.Model
         /// </summary>
         /// <param name="textAction"></param>
         /// <returns></returns>
-        public string EventStepOnGameObcject(string textAction);
+        public string EventStepOnGameObject(string textAction);
     }
 }
