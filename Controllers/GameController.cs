@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CTF_GAME.Model;
 using System.Text;
+using CTF_GAME.Model.ElementsMaps.MobsOnMap;
 
 namespace CTF_GAME.Controllers
 {
@@ -18,7 +19,7 @@ namespace CTF_GAME.Controllers
         public GameController()
         {
             MapGame = new MapGame(30);
-            MapGame.Initialization(new FieldGameOnMap(), new OasisGameOnMap(), new SwoardGameOnMap());
+            MapGame.Initialization(new FieldGameOnMap(), new OasisGameOnMap(), new SwoardGameOnMap(), new SimpleMobs());
         }
 
         /// <summary>
