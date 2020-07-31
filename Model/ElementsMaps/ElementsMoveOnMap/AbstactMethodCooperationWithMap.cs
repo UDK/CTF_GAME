@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace CTF_GAME.Model
 {
+    /// <summary>
+    /// Все объекты которые просто можно подобрать и продолжить движение
+    /// </summary>
     public abstract class AbstactMethodCooperationWithMap : IObjectGameOnMap
     {
         public abstract byte GetASCII { get; }
