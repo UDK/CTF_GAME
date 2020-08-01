@@ -18,9 +18,14 @@ namespace CTF_GAME.Controllers
             _enemy = enemy;
         }
 
-        public void FightsDo(string action)
-        { 
-            
+        /// <summary>
+        /// Процесс боя между двумя мобами с карты
+        /// </summary>
+        /// <param name="action">действие от игрока</param>
+        /// <returns>Сообщает, закончился ли бой или нет</returns>
+        public bool FightsDo(string action)
+        {
+            return false;
         }
     }
 }

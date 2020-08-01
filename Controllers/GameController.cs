@@ -29,6 +29,7 @@ namespace CTF_GAME.Controllers
         /// <returns>Ответ либо карта, либо что-то другое</returns>
         public string HandlerAction(string textAction)
         {
+            //Здесь на StringBuilder желательно заменить
             string actionResponse = MapGame.GetObjectPointMap(MapGame.GameHor, MapGame.GameVert).Action(ref this.mapGame, textAction);
             string eventResponse = MapGame.GetObjectPointMap(MapGame.GameHor, MapGame.GameVert).EventStepOnGameObject(textAction);
             return actionResponse + '\n' + eventResponse;

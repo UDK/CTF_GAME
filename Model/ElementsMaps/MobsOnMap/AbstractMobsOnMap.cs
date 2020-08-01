@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CTF_GAME.Controllers;
 
 namespace CTF_GAME.Model.ElementsMaps
 {
     public abstract class AbstractMobsOnMap : IObjectGameOnMap
     {
+        /// <summary>
+        /// отвечает за то, первый раз находится герой на это позиции или повторный?
+        /// </summary>
+        private bool _checkThis = true;
+
         public abstract byte GetASCII { get; }
 
         public abstract string GetASCIIArt { get; }
@@ -41,16 +47,28 @@ namespace CTF_GAME.Model.ElementsMaps
         /// </summary>
         public abstract int ChangeCriticalDamage { get; set; }
 
-        private string _startFight = " ###### #  ####  #    # #####     ####  #####   ##   #####  ##### \n #      # #    # #    #   #      #        #    #  #  #    #   #   \n #####  # #      ######   #       ####    #   #    # #    #   #   \n #      # #  ### #    #   #           #   #   ###### #####    #   \n #      # #    # #    #   #      #    #   #   #    # #   #    #   \n #      #  ####  #    #   #       ####    #   #    # #    #   #   ";
+        private const string _startFight = " ###### #  ####  #    # #####     ####  #####   ##   #####  ##### \n #      # #    # #    #   #      #        #    #  #  #    #   #   \n #####  # #      ######   #       ####    #   #    # #    #   #   \n #      # #  ### #    #   #           #   #   ###### #####    #   \n #      # #    # #    #   #      #    #   #   #    # #   #    #   \n #      #  ####  #    #   #       ####    #   #    # #    #   #   ";
+
+        private FightsController fightsAttack;
 
         public string Action(ref MapGame mapGame, string textAction)
         {
-            throw new NotImplementedException();
+            if (fightsAttack == null)
+                fightsAttack = new FightsController(mapGame.hero, this);
+            fightsAttack.FightsDo(textAction);
+            //
+            return "       # ##### ##### ##### ##### ##### ##### ##### ##### ##### #       \n      #                                                         #      \n     #                                                           #     \n    #                                                             #    \n   #                                                               #   \n  #                                                                 #  \n #                                                                   #  \n              HERO                                ENEMY                                       \n #                                 #                                 #  \n #      HP:                        #      HP: {HealthPoint}          #  \n #                                 #                                 #  \n        ARMOR:                            ARMOR:                                           \n #                                 #                                 #  \n #      CHANGE DODGE:              #      CHANGE DODGE:              #  \n #                                 #                                 #  \n                                                                       \n #                                                                   # \n  #                                                                 #  \n   #                                                               #   \n    #    													      #    \n     #                                                           #     \n      #                                                         #      \n       # ##### ##### ##### ##### ##### ##### ##### ##### ##### #  ";
         }
 
         public string EventStepOnGameObject(string textAction)
         {
-            return _startFight;
+            if (_checkThis)
+            {
+                _checkThis = false;
+                return _startFight;
+            }
+            else
+                return "";
         }
 
         public abstract ChangeAppearObjectMap GetRandom();

@@ -4,6 +4,8 @@ using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Text;
+using CTF_GAME.Model.ElementsMaps;
+using CTF_GAME.Model.ElementsMaps.MobsOnMap;
 
 namespace CTF_GAME.Model
 {
@@ -86,7 +88,6 @@ namespace CTF_GAME.Model
 
 
         }
-
         public int LnghtMaps
         {
             get => _lngMaps;
@@ -103,6 +104,7 @@ namespace CTF_GAME.Model
                 _lngMaps = value;
             }
         }
+        public Hero hero { get; set; }
 
         IObjectGameOnMap this[int hor, int vert]
         {
@@ -122,6 +124,7 @@ namespace CTF_GAME.Model
             _sizeVert = sizeViewVert;
             LnghtMaps = lenghtMaps;
             this.mapsObject = new IObjectGameOnMap[LnghtMaps, LnghtMaps];
+            hero = new Hero();
         }
 
         private IObjectGameOnMap[,] mapsObject;
@@ -207,6 +210,7 @@ namespace CTF_GAME.Model
             }
             return viewMap.ToString();
         }
+
         /// <summary>
         /// Получаем ASCII код с указанной точки на карте
         /// </summary>
