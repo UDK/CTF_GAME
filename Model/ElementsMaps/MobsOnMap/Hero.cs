@@ -7,21 +7,81 @@ namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
 {
     public class Hero : AbstractMobsOnMap
     {
-        public override byte GetASCII => throw new NotImplementedException();
+        protected int _health = 100;
 
-        public override string GetASCIIArt => throw new NotImplementedException();
+        protected int _armor = 25;
 
-        public override int lvlMobs => throw new NotImplementedException();
+        protected int _changeDodge = 5;
 
-        public override int HealthPoint { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override int Armor { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override int ChangeDodge { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override int Damage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override int ChangeCriticalDamage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        protected int _changeCriticalDamage = 1;
+
+        protected int _damage = 35;
+
+        public override byte GetASCII => (byte)' ';
+
+        public override string GetASCIIArt => "";
+
+        public override int lvlMobs => 1;
+
+        public override int HealthPoint { get => _health; set => _health = value; }
+
+        public override int Armor
+        {
+            get
+            {
+                if (_armor <= 90 && _armor > 0)
+                    return _armor * 10;
+                else if (_armor > 90)
+                    return 90;
+                else
+                    return 0;
+            }
+            set => _armor = value;
+        }
+
+        public override int ChangeDodge
+        {
+            get
+            {
+                if (_changeDodge <= 90 && _changeDodge > 0)
+                    return _changeDodge * 10;
+                else if (_changeDodge > 90)
+                    return 90;
+                else
+                    return 0;
+            }
+            set => _changeDodge = value;
+        }
+
+        public override int Damage
+        {
+            get
+            {
+                if (_damage < 1)
+                    return 1;
+                else
+                    return _damage;
+            }
+            set => _damage = value;
+        }
+
+        public override int ChangeCriticalDamage
+        {
+            get
+            {
+                if (_changeCriticalDamage < 0)
+                    return 0;
+                else if (_changeCriticalDamage > 100)
+                    return 100;
+                else
+                    return _changeCriticalDamage;
+            }
+            set => _changeCriticalDamage = value;
+        }
 
         public override ChangeAppearObjectMap GetRandom()
         {
-            throw new NotImplementedException();
+            return new ChangeAppearObjectMap { typeRandom = TypeRandom.Never};
         }
 
         public override AbstractMobsOnMap LevelUp()

@@ -8,13 +8,17 @@ namespace CTF_GAME.Model
     public enum TypeRandom
     {
         /// <summary>
-        /// Уникальный предмет, встречается один раз за игру
+        /// Уникальный объект, встречается один раз за игру
         /// </summary>
         UniqueRandom = 1,
         /// <summary>
-        /// Предмет, который встречается один/несолько раз за игру
+        /// Объект, который встречается один/несолько раз за игру
         /// </summary>
-        RepeatingRandom = 2
+        RepeatingRandom = 2,
+        /// <summary>
+        /// Никогда не встречающийся объект
+        /// </summary>
+        Never = 3
     }
     public struct ChangeAppearObjectMap
     {

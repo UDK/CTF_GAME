@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace CTF_GAME.Model.FightsAttack
 {
-    public abstract class IAttackMagic : IAttacks
+    public abstract class IAttackMagic : IAttack
     {
-        public IAttackMagic(AbstractMobsOnMap hero) : base(hero)
-        { }
+        public int Damage => throw new NotImplementedException();
+
+        public int ChangeCritical => throw new NotImplementedException();
     }
 }

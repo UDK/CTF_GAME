@@ -6,30 +6,10 @@ using System.Threading.Tasks;
 
 namespace CTF_GAME.Model.FightsAttack
 {
-    public class BaseAttack : IAttacks
+    public class BaseAttack : IAttack
     {
-        Random randomChange = new Random();
+        public int Damage { get; } = 38;
 
-        private int _changeCriticalDamage = 0;
-
-        private int _baseDamage = 38;
-        public BaseAttack(AbstractMobsOnMap hero) : base(hero)
-        { }
-
-        public int Damage
-        {
-            get
-            {
-                return _baseDamage + _hero.Damage;
-            }
-        }
-
-        public int ChangeCritical
-        {
-            get
-            {
-                return (100 - _changeCriticalDamage) * _hero.ChangeCriticalDamage + _changeCriticalDamage;
-            }
-        }
+        public int ChangeCritical { get; } = 0;
     }
 }

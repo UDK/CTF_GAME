@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CTF_GAME.Controllers;
+using CTF_GAME.Model.FightsAttack;
 
 namespace CTF_GAME.Model.ElementsMaps
 {
@@ -47,9 +48,24 @@ namespace CTF_GAME.Model.ElementsMaps
         /// </summary>
         public abstract int ChangeCriticalDamage { get; set; }
 
-        private const string _startFight = " ###### #  ####  #    # #####     ####  #####   ##   #####  ##### \n #      # #    # #    #   #      #        #    #  #  #    #   #   \n #####  # #      ######   #       ####    #   #    # #    #   #   \n #      # #  ### #    #   #           #   #   ###### #####    #   \n #      # #    # #    #   #      #    #   #   #    # #   #    #   \n #      #  ####  #    #   #       ####    #   #    # #    #   #   ";
+        public AbstractMobsOnMap()
+        {
+            attacksTechniques.Add(new BaseAttack());
+        }
+
+        public AbstractMobsOnMap(IAttack[] attacks)
+        {
+            attacksTechniques.AddRange(attacks);
+        }
 
         private FightsController fightsAttack;
+
+        /// <summary>
+        /// Все атаки моба
+        /// </summary>
+        public List<IAttack> attacksTechniques { get; set; } = new List<IAttack>(2);
+
+        private const string _startFight = " ###### #  ####  #    # #####     ####  #####   ##   #####  ##### \n #      # #    # #    #   #      #        #    #  #  #    #   #   \n #####  # #      ######   #       ####    #   #    # #    #   #   \n #      # #  ### #    #   #           #   #   ###### #####    #   \n #      # #    # #    #   #      #    #   #   #    # #   #    #   \n #      #  ####  #    #   #       ####    #   #    # #    #   #   ";
 
         public string Action(ref MapGame mapGame, string textAction)
         {
@@ -57,7 +73,7 @@ namespace CTF_GAME.Model.ElementsMaps
                 fightsAttack = new FightsController(mapGame.hero, this);
             fightsAttack.FightsDo(textAction);
             //
-            return "       # ##### ##### ##### ##### ##### ##### ##### ##### ##### #       \n      #                                                         #      \n     #                                                           #     \n    #                                                             #    \n   #                                                               #   \n  #                                                                 #  \n #                                                                   #  \n              HERO                                ENEMY                                       \n #                                 #                                 #  \n #      HP:                        #      HP: {HealthPoint}          #  \n #                                 #                                 #  \n        ARMOR:                            ARMOR:                                           \n #                                 #                                 #  \n #      CHANGE DODGE:              #      CHANGE DODGE:              #  \n #                                 #                                 #  \n                                                                       \n #                                                                   # \n  #                                                                 #  \n   #                                                               #   \n    #    													      #    \n     #                                                           #     \n      #                                                         #      \n       # ##### ##### ##### ##### ##### ##### ##### ##### ##### #  ";
+            return $"\n       # ##### ##### ##### ##### ##### ##### ##### ##### ##### #       \n      #                                                         #      \n     #                                                           #     \n    #                                                             #    \n   #                                                               #   \n  #                                                                 #  \n #                                                                   #  \n              HERO                                ENEMY               \n #                                 #                                 #  \n        HP:  {mapGame.hero.HealthPoint}                          HP: {HealthPoint}     	       \n #                                 #                                 #  \n        ARMOR:                            ARMOR:                       \n #                                 #                                 #  \n #      CHANGE DODGE:              #      CHANGE DODGE:              #  \n #                                 #                                 #  \n                                                                       \n #                                                                   # \n  #                                                                 #  \n   #                                                               #   \n    #    													      #    \n     #                                                           #     \n      #                                                         #      \n       # ##### ##### ##### ##### ##### ##### ##### ##### ##### #  ";
         }
 
         public string EventStepOnGameObject(string textAction)

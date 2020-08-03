@@ -39,6 +39,7 @@ namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
         {
             get => "";
         }
+
         public override int HealthPoint { get => _health; set => _health = value; }
 
         public override int Armor

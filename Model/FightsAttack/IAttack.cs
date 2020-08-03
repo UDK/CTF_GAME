@@ -6,17 +6,8 @@ using System.Threading.Tasks;
 
 namespace CTF_GAME.Model.FightsAttack
 {
-    public abstract class IAttacks
+    public interface IAttack
     {
-        /// <summary>
-        /// Герой со всеми свойствами
-        /// </summary>
-        protected AbstractMobsOnMap _hero;
-
-        public IAttacks(AbstractMobsOnMap hero)
-        {
-            _hero = hero;
-        }
 
         /// <summary>
         /// Наносимый урон
