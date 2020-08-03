@@ -8,8 +8,10 @@ namespace CTF_GAME.Model.FightsAttack
 {
     public class BaseAttack : IAttack
     {
-        public int Damage { get; } = 38;
+        public override int Damage => 38;
 
-        public int ChangeCritical { get; } = 0;
+        public override int ChangeCritical => 0;
+
+        public override string NameAttack => "Base attack";
     }
 }

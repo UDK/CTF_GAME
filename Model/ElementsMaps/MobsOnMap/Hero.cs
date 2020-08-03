@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CTF_GAME.Model.FightsAttack;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,11 @@ namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
 {
     public class Hero : AbstractMobsOnMap
     {
+        public Hero()
+        {
+            attacksTechniques.Add(new CriticalAttack());
+        }
+
         protected int _health = 100;
 
         protected int _armor = 25;
@@ -30,7 +36,7 @@ namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
             get
             {
                 if (_armor <= 90 && _armor > 0)
-                    return _armor * 10;
+                    return _armor;
                 else if (_armor > 90)
                     return 90;
                 else

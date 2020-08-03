@@ -22,21 +22,25 @@ namespace CTF_GAME.Controllers
         }
 
         /// <summary>
-        /// Процесс боя между двумя мобами карты
+        /// Процесс боя между двумя мобами карты, если игрок выйграл, то возвращет true
         /// </summary>
         /// <param name="action">действие от игрока</param>
-        /// <returns>Сообщает, закончился ли бой или нет</returns>
-        public void FightsDo(string action)
+        /// <returns>Сообщает, победил ли игрок</returns>
+        public bool FightsDo(string action)
         {
-            if (int.TryParse(action, out int numberTechniquesAttack) && numberTechniquesAttack > 0 && numberTechniquesAttack <= mobs.hero.attacksTechniques.Count)
+            if (int.TryParse(action, out int numberTechniquesAttack) && numberTechniquesAttack >= 0 && numberTechniquesAttack <= mobs.hero.attacksTechniques.Count)
             {
-                mobs = FightsDo(mobs.hero, mobs.enemy, mobs.hero.attacksTechniques[numberTechniquesAttack - 1]);
+                mobs = FightsDo(mobs.hero, mobs.enemy, mobs.hero.attacksTechniques[numberTechniquesAttack]);
                 //Если будет время, то стоит написать нормальный ИИ
                 if (mobs.enemy.HealthPoint > 0)
                     mobs = FightsDo(mobs.enemy, mobs.hero, mobs.enemy.attacksTechniques[Random.Next(0, mobs.enemy.attacksTechniques.Count - 1)]);
             }
-            if (mobs.hero.HealthPoint == 0 || mobs.enemy.HealthPoint == 0)
+            if (mobs.hero.HealthPoint <= 0)
                 throw new GameEndException("game over");
+            else if (mobs.enemy.HealthPoint <= 0)
+                return true;
+            else
+                return false;
         }
 
         /// <summary>

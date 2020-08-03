@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using CTF_GAME.Controllers;
 using CTF_GAME.Model.FightsAttack;
@@ -71,9 +72,26 @@ namespace CTF_GAME.Model.ElementsMaps
         {
             if (fightsAttack == null)
                 fightsAttack = new FightsController(mapGame.hero, this);
-            fightsAttack.FightsDo(textAction);
-            //
-            return $"\n       # ##### ##### ##### ##### ##### ##### ##### ##### ##### #       \n      #                                                         #      \n     #                                                           #     \n    #                                                             #    \n   #                                                               #   \n  #                                                                 #  \n #                                                                   #  \n              HERO                                ENEMY               \n #                                 #                                 #  \n        HP:  {mapGame.hero.HealthPoint}                          HP: {HealthPoint}     	       \n #                                 #                                 #  \n        ARMOR:                            ARMOR:                       \n #                                 #                                 #  \n #      CHANGE DODGE:              #      CHANGE DODGE:              #  \n #                                 #                                 #  \n                                                                       \n #                                                                   # \n  #                                                                 #  \n   #                                                               #   \n    #    													      #    \n     #                                                           #     \n      #                                                         #      \n       # ##### ##### ##### ##### ##### ##### ##### ##### ##### #  ";
+            if (fightsAttack.FightsDo(textAction))
+            {
+                mapGame[mapGame.GameHor, mapGame.GameVert] = new FieldGameOnMap();
+            }
+            else
+            {
+                StringBuilder output = new StringBuilder($"\n       # ##### ##### ##### ##### ##### ##### ##### ##### ##### #     \n     #                                                           #     \n   #                                                               #    \n #                                                                   #  \n              HERO                                ENEMY               \n #                                 #                                 #  \n        HP:  {mapGame.hero.HealthPoint}                            HP: {HealthPoint}\n #                                 #                                 #  \n        ARMOR:  {mapGame.hero.Armor}                          ARMOR:  {Armor}\n #                                 #                                 #  \n        CHANGE DODGE:  {mapGame.hero.ChangeDodge}                   CHANGE DODGE:  {ChangeDodge}\n #                                 #                                 #  \n                                                                       \n #                                                                   # \n   #                                                               #   \n     #                                                           #        \n       # ##### ##### ##### ##### ##### ##### ##### ##### ##### #  ", 2048);
+                StringBuilder indents = new StringBuilder(16);
+                output.Append("\nEnter the number corresponding to the attack:");
+                for (int i = 0; i < mapGame.hero.attacksTechniques.Count; i++)
+                {
+                    IAttack attack = mapGame.hero.attacksTechniques[i];
+                    output.Append($"\n{i})");
+                    output.Append(indents.Append(' '));
+                    output.Append(indents);
+                    output.Append(attack.OutputText);
+                }
+                return output.ToString();
+            }
+            return "qq";
         }
 
         public string EventStepOnGameObject(string textAction)

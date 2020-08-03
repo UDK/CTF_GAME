@@ -8,8 +8,8 @@ namespace CTF_GAME.Model.FightsAttack
 {
     public abstract class IAttackMagic : IAttack
     {
-        public int Damage => throw new NotImplementedException();
+        public override int Damage => throw new NotImplementedException();
 
-        public int ChangeCritical => throw new NotImplementedException();
+        public override int ChangeCritical => throw new NotImplementedException();
     }
 }

@@ -6,17 +6,26 @@ using System.Threading.Tasks;
 
 namespace CTF_GAME.Model.FightsAttack
 {
-    public interface IAttack
+    public abstract class IAttack
     {
+        /// <summary>
+        /// Название атаки
+        /// </summary>
+        public abstract string NameAttack { get; }
 
         /// <summary>
         /// Наносимый урон
         /// </summary>
-        int Damage { get; }
+        public abstract int Damage { get; }
 
         /// <summary>
         /// Шанс критического удара
         /// </summary>
-        int ChangeCritical { get; }
+        public abstract int ChangeCritical { get; }
+
+        /// <summary>
+        /// Описание атаки которое надо выводить игроку 
+        /// </summary>
+        public string OutputText => $"{NameAttack}  ==Damage: {Damage}==  ==Change critical attack: {ChangeCritical}==";
     }
 }

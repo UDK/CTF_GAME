@@ -106,7 +106,7 @@ namespace CTF_GAME.Model
         }
         public Hero hero { get; set; }
 
-        IObjectGameOnMap this[int hor, int vert]
+        public IObjectGameOnMap this[int hor, int vert]
         {
             get
             {
