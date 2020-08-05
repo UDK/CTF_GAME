@@ -19,20 +19,11 @@ namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
 
         private int _damage = 10;
 
-        private int _level = 1;
+        private int _lvlUpMobs = 1000;
 
         public override byte GetASCII
         {
             get => (byte)ASCII;
-        }
-
-        public override int lvlMobs
-        {
-            get
-            {
-                //Тут бы запилить логику исходя из всех характеристик отдавать уровень
-                return _level;
-            }
         }
 
         public override string GetASCIIArt
@@ -96,18 +87,19 @@ namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
             set => _changeCriticalDamage = value;
         }
 
+        public override int MaxHealthPoint { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        protected override int LvlUpMobs { get => _lvlUpMobs; set => _lvlUpMobs = value; }
+
+        protected override int ExperienceForDeath => 45 * lvlMobs;
+
         public override ChangeAppearObjectMap GetRandom()
         {
             return new ChangeAppearObjectMap
             {
                 typeRandom = TypeRandom.RepeatingRandom,
-                changeRandom = 3
+                changeRandom = 8
             };
-        }
-
-        public override AbstractMobsOnMap LevelUp()
-        {
-            throw new NotImplementedException();
         }
     }
 }

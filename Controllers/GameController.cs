@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CTF_GAME.Model;
 using System.Text;
 using CTF_GAME.Model.ElementsMaps.MobsOnMap;
+using CTF_GAME.Model.ElementsMaps.ElementsMoveOnMap;
 
 namespace CTF_GAME.Controllers
 {
@@ -19,7 +20,8 @@ namespace CTF_GAME.Controllers
         public GameController()
         {
             MapGame = new MapGame(30);
-            MapGame.Initialization(new FieldGameOnMap(), new OasisGameOnMap(), new SwoardGameOnMap(), new SimpleMobs());
+            MapGame.Initialization(new FieldGameOnMap(), new OasisGameOnMap(), new SwoardGameOnMap(),
+                new SimpleMobs(), new DwarfFortressGameOnMap(), new MedicalKitGameOnMap());
         }
 
         /// <summary>

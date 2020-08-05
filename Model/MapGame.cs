@@ -244,5 +244,12 @@ namespace CTF_GAME.Model
             }
         }
 
+        /// <summary>
+        /// Убирает с клетки на которой находится герой объект, заменяя его пустым полем
+        /// </summary>
+        public void ClearMapsCell()
+        {
+            mapsObject[GameHor, GameVert] = new FieldGameOnMap();
+        }
     }
 }

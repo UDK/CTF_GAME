@@ -8,6 +8,7 @@ namespace CTF_GAME.Model
     public class SwoardGameOnMap : AbstactMethodCooperationWithMap
     {
         private const string message = "WOW, this big and very powerful sword. I will have been hoping to me\n";
+
         private char ASCII = '|';
         public override byte GetASCII
         {

@@ -13,23 +13,35 @@ namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
             attacksTechniques.Add(new CriticalAttack());
         }
 
-        protected int _health = 100;
+        private int _health = 100;
 
-        protected int _armor = 25;
+        private int _armor = 25;
 
-        protected int _changeDodge = 5;
+        private int _changeDodge = 5;
 
-        protected int _changeCriticalDamage = 1;
+        private int _changeCriticalDamage = 1;
 
-        protected int _damage = 35;
+        private int _damage = 35;
+
+        private int _maxHealthPoint = 100;
+
+        private int _lvlUpMobs = 100;
 
         public override byte GetASCII => (byte)' ';
 
         public override string GetASCIIArt => "";
 
-        public override int lvlMobs => 1;
-
-        public override int HealthPoint { get => _health; set => _health = value; }
+        public override int HealthPoint
+        {
+            get => _health;
+            set
+            {
+                if (value > MaxHealthPoint)
+                    _health = MaxHealthPoint;
+                else
+                    _health = value;
+            }
+        }
 
         public override int Armor
         {
@@ -85,14 +97,15 @@ namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
             set => _changeCriticalDamage = value;
         }
 
+        protected override int LvlUpMobs { get => _lvlUpMobs; set => _lvlUpMobs = value; }
+
+        protected override int ExperienceForDeath => 100 * lvlMobs;
+
+        public override int MaxHealthPoint { get => _maxHealthPoint; set => _maxHealthPoint = value; }
+
         public override ChangeAppearObjectMap GetRandom()
         {
-            return new ChangeAppearObjectMap { typeRandom = TypeRandom.Never};
-        }
-
-        public override AbstractMobsOnMap LevelUp()
-        {
-            throw new NotImplementedException();
+            return new ChangeAppearObjectMap { typeRandom = TypeRandom.Never };
         }
     }
 }
