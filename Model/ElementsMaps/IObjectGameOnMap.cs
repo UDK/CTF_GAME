@@ -8,7 +8,7 @@ namespace CTF_GAME.Model
     /// <summary>
     /// От этого интерфейса должны наследоваться все игровые объекты на карте
     /// </summary>
-    public interface IObjectGameOnMap
+    public interface IObjectGameOnMap : ICloneable
     {
         /// <summary>
         /// Метод 
@@ -18,7 +18,7 @@ namespace CTF_GAME.Model
         /// Возвращает ASCII представление объекта
         /// </summary>
         /// <returns>Представление объекта на карте, в виде ASCII кода</returns>
-        public byte GetASCII { get; }
+        public byte GetASCIIOnMaps { get; }
 
         /// <summary>
         /// Обрабатывает действие игрока, возвращает ответ в виде текста

@@ -9,12 +9,17 @@ namespace CTF_GAME.Model.ElementsMaps.ElementsMoveOnMap
     {
         private const string message = "You've wandered into an abandoned dwarven fortress... It was once a bustling place, but now it has long been forgotten.\n";
 
-        public override byte GetASCII => (byte)'u';
+        public override byte GetASCIIOnMaps => (byte)'u';
 
         public override string Action(ref MapGame mapGame, string textAction)
         {
             Move(ref mapGame, textAction);
             return mapGame.CenterViewMap();
+        }
+
+        public override object Clone()
+        {
+            return new DwarfFortressGameOnMap();
         }
 
         public override string EventStepOnGameObject(string textAction)

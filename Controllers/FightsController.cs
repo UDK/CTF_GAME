@@ -26,7 +26,7 @@ namespace CTF_GAME.Controllers
         /// </summary>
         /// <param name="action">действие от игрока</param>
         /// <returns>Сообщает, победил ли игрок</returns>
-        public bool FightsDo(string action)
+        public ResponseFights FightsDo(string action)
         {
             if (int.TryParse(action, out int numberTechniquesAttack) && numberTechniquesAttack >= 0 && numberTechniquesAttack <= mobs.hero.attacksTechniques.Count)
             {
@@ -38,9 +38,9 @@ namespace CTF_GAME.Controllers
             if (mobs.hero.HealthPoint <= 0)
                 throw new GameEndException("game over");
             else if (mobs.enemy.HealthPoint <= 0)
-                return true;
+                return new ResponseFights() { winPlayers = true, response = mobs.enemy.GetASCIIArtEnd};
             else
-                return false;
+                return new ResponseFights() { winPlayers = false };
         }
 
         /// <summary>
@@ -74,5 +74,24 @@ namespace CTF_GAME.Controllers
             public AbstractMobsOnMap enemy;
         }
 
+        /// <summary>
+        /// Структура, возвращающаяся после каждого боя(атаки)
+        /// </summary>
+        public struct ResponseFights
+        {
+            public static implicit operator bool(ResponseFights x)
+            {
+                return x.winPlayers;
+            }
+            
+            public static implicit operator string(ResponseFights x)
+            {
+                return x.response;
+            }
+
+            public bool winPlayers;
+
+            public string response;
+        }
     }
 }

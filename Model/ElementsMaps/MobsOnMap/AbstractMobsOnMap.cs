@@ -23,9 +23,17 @@ namespace CTF_GAME.Model.ElementsMaps
 
         protected int _lvl = 1;
 
-        public abstract byte GetASCII { get; }
+        public abstract byte GetASCIIOnMaps { get; }
 
-        public abstract string GetASCIIArt { get; }
+        /// <summary>
+        /// ASCII-арт который стоит показывать, при входе из клетки карты
+        /// </summary>
+        public abstract string GetASCIIArtStart { get; }
+
+        /// <summary>
+        /// ASCII-арт который стоит показывать, при выходе из клетки карты
+        /// </summary>
+        public abstract string GetASCIIArtEnd { get; }
 
         /// <summary>
         /// Значение при котором Моб повысит себе уровень
@@ -109,8 +117,12 @@ namespace CTF_GAME.Model.ElementsMaps
         {
             if (fightsAttack == null)
                 fightsAttack = new FightsController(mapGame.hero, this);
-            if (fightsAttack.FightsDo(textAction))
+            FightsController.ResponseFights responseFights = fightsAttack.FightsDo(textAction);
+            if (responseFights)
+            {
                 mapGame.ClearMapsCell();
+                return responseFights;
+            }
             else
             {
                 StringBuilder output = new StringBuilder($"\n       # ##### ##### ##### ##### ##### ##### ##### ##### ##### #     \n     #                                                           #     \n   #                                                               #    \n #                                                                   #  \n              HERO                                ENEMY               \n #                                 #                                 #  \n        HP:  {mapGame.hero.HealthPoint}                            HP: {HealthPoint}\n #                                 #                                 #  \n        ARMOR:  {mapGame.hero.Armor}                          ARMOR:  {Armor}\n #                                 #                                 #  \n        CHANGE DODGE:  {mapGame.hero.ChangeDodge}                   CHANGE DODGE:  {ChangeDodge}\n #                                 #                                 #  \n                                                                       \n #                                                                   # \n   #                                                               #   \n     #                                                           #        \n       # ##### ##### ##### ##### ##### ##### ##### ##### ##### #  ", 2048);
@@ -126,7 +138,6 @@ namespace CTF_GAME.Model.ElementsMaps
                 }
                 return output.ToString();
             }
-            return "qq";
         }
 
         public string EventStepOnGameObject(string textAction)
@@ -154,5 +165,7 @@ namespace CTF_GAME.Model.ElementsMaps
             ChangeCriticalDamage += 2;
             Damage += 5;
         }
+
+        public abstract object Clone();
     }
 }

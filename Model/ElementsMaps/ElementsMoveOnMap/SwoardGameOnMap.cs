@@ -10,7 +10,7 @@ namespace CTF_GAME.Model
         private const string message = "WOW, this big and very powerful sword. I will have been hoping to me\n";
 
         private char ASCII = '|';
-        public override byte GetASCII
+        public override byte GetASCIIOnMaps
         {
             get
             {
@@ -39,6 +39,11 @@ namespace CTF_GAME.Model
         public override string EventStepOnGameObject(string textAction)
         {
             return message;
+        }
+
+        public override object Clone()
+        {
+            return new SwoardGameOnMap();
         }
     }
 }

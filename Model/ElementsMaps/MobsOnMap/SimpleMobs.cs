@@ -17,16 +17,18 @@ namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
 
         private int _changeCriticalDamage = 0;
 
+        private int _maxHealthPoint = 30;
+
         private int _damage = 10;
 
         private int _lvlUpMobs = 1000;
 
-        public override byte GetASCII
+        public override byte GetASCIIOnMaps
         {
             get => (byte)ASCII;
         }
 
-        public override string GetASCIIArt
+        public override string GetASCIIArtStart
         {
             get => "";
         }
@@ -87,11 +89,18 @@ namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
             set => _changeCriticalDamage = value;
         }
 
-        public override int MaxHealthPoint { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override int MaxHealthPoint { get => _maxHealthPoint; set => _maxHealthPoint = value; }
+
+        public override string GetASCIIArtEnd => "    \t\t\t\t                   ,--.\n                                                  {    }\n                                                  K,   }\n                                                 /  `Y`\n                                            _   /   /\n                                           {_'-K.__/\n                                             `/-.__L._\n                                             /  ' /`\\_}\n                                            /  ' /     -ART BY ZEUS-\n                                    ____   /  ' /\n                             ,-'~~~~    ~~/  ' /_\n                           ,'             ``~~~%%',\n                          (                     %  Y\n                         {                      %% I\n                        {      -                 %  `.\n                        |       ',                %  )\n                        |        |   ,..__      __. Y\n                        |    .,_./  Y ' / ^Y   J   )|\n                        \\           |' /   |   |   ||\n                         \\          L_/    . _ (_,.'(\n                          \\,   ,      ^^\"\"' / |      )\n                            \\_  \\          /,L]     /\n                              '-_`-,       ` `   ./`\n                                 `-(_            )\n                                     ^^\\..___,.--`\n Press Enter for continue...";
 
         protected override int LvlUpMobs { get => _lvlUpMobs; set => _lvlUpMobs = value; }
 
         protected override int ExperienceForDeath => 45 * lvlMobs;
+
+        public override object Clone()
+        {
+            return new SimpleMobs();
+        }
 
         public override ChangeAppearObjectMap GetRandom()
         {

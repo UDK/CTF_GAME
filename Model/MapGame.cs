@@ -166,7 +166,7 @@ namespace CTF_GAME.Model
             foreach (var obUnique in objUnique)
             {
                 Random random = new Random();
-                mapsObject[random.Next(0, _lngMaps), random.Next(0, _lngMaps)] = obUnique;
+                mapsObject[random.Next(0, _lngMaps), random.Next(0, _lngMaps)] = (IObjectGameOnMap)obUnique.Clone();
             }
         }
 
@@ -189,7 +189,8 @@ namespace CTF_GAME.Model
                     BestNumberRandom = randomIntChange;
                 }
             }
-            return objectGameOnMapBestRandom;
+            //Как мне это преобразование не нрав с боксингом и анбоксингом
+            return (IObjectGameOnMap)objectGameOnMapBestRandom.Clone();
         }
 
         /// <summary>
@@ -229,7 +230,7 @@ namespace CTF_GAME.Model
             }
             else
             {
-                return (char)mapsObject[hor, vert].GetASCII;
+                return (char)mapsObject[hor, vert].GetASCIIOnMaps;
             }
         }
         public IObjectGameOnMap GetObjectPointMap(int hor, int vert)

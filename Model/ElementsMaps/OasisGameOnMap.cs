@@ -10,7 +10,7 @@ namespace CTF_GAME.Model
     {
         private char ASCII = '8';
 
-        public byte GetASCII
+        public byte GetASCIIOnMaps
         {
             get
             {
@@ -28,6 +28,11 @@ namespace CTF_GAME.Model
         public string Action(ref MapGame mapGame, string textAction)
         {
             throw new GameEndException("Thanks for the game, Wanderer");
+        }
+
+        public object Clone()
+        {
+            return new OasisGameOnMap();
         }
 
         public string EventStepOnGameObject(string textAction)

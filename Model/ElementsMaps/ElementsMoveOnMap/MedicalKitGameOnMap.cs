@@ -15,13 +15,18 @@ namespace CTF_GAME.Model.ElementsMaps.ElementsMoveOnMap
 
         private readonly Random random = new Random();
 
-        public override byte GetASCII => (byte)'+';
+        public override byte GetASCIIOnMaps => (byte)'+';
 
         public override string Action(ref MapGame mapGame, string textAction)
         {
             mapGame.hero.HealthPoint += 20;
             Move(ref mapGame, textAction);
             return mapGame.CenterViewMap();
+        }
+
+        public override object Clone()
+        {
+            return new MedicalKitGameOnMap();
         }
 
         public override string EventStepOnGameObject(string textAction)

@@ -27,9 +27,9 @@ namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
 
         private int _lvlUpMobs = 100;
 
-        public override byte GetASCII => (byte)' ';
+        public override byte GetASCIIOnMaps => (byte)' ';
 
-        public override string GetASCIIArt => "";
+        public override string GetASCIIArtStart => "";
 
         public override int HealthPoint
         {
@@ -103,9 +103,16 @@ namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
 
         public override int MaxHealthPoint { get => _maxHealthPoint; set => _maxHealthPoint = value; }
 
+        public override string GetASCIIArtEnd => throw new NotImplementedException();
+
         public override ChangeAppearObjectMap GetRandom()
         {
             return new ChangeAppearObjectMap { typeRandom = TypeRandom.Never };
+        }
+
+        public override object Clone()
+        {
+            return new Hero();
         }
     }
 }

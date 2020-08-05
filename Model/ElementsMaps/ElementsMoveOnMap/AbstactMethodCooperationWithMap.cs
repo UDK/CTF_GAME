@@ -10,9 +10,11 @@ namespace CTF_GAME.Model
     /// </summary>
     public abstract class AbstactMethodCooperationWithMap : IObjectGameOnMap
     {
-        public abstract byte GetASCII { get; }
+        public abstract byte GetASCIIOnMaps { get; }
 
         public abstract string Action(ref MapGame mapGame, string textAction);
+
+        public abstract object Clone();
 
         public virtual string EventStepOnGameObject(string textAction)
         {
