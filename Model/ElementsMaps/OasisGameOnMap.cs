@@ -10,7 +10,7 @@ namespace CTF_GAME.Model
     {
         private char ASCII = '8';
 
-        public byte GetASCII
+        public byte GetASCIIOnMaps
         {
             get
             {
@@ -30,9 +30,14 @@ namespace CTF_GAME.Model
             throw new GameEndException("Thanks for the game, Wanderer");
         }
 
+        public object Clone()
+        {
+            return new OasisGameOnMap();
+        }
+
         public string EventStepOnGameObject(string textAction)
         {
-            return "flag_ctf{govno}";
+            return "flag_ctf{DEMO_FLAG_PART_I}. I hope you got all the other parts of the flag in time";
         }
 
         public ChangeAppearObjectMap GetRandom()

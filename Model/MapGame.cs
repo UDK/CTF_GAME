@@ -4,6 +4,8 @@ using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Text;
+using CTF_GAME.Model.ElementsMaps;
+using CTF_GAME.Model.ElementsMaps.MobsOnMap;
 
 namespace CTF_GAME.Model
 {
@@ -40,6 +42,12 @@ namespace CTF_GAME.Model
         /// Где находится игрок по горизонтали
         /// </summary>
         private int gameHor;
+        
+        /// <summary>
+        /// Инструкция по перемещению на карте
+        /// </summary>
+        private string MoveInstruction => "s - move down, a - move left, w - move top, d - move right ";
+
         public int GameVert
         {
             get
@@ -86,7 +94,6 @@ namespace CTF_GAME.Model
 
 
         }
-
         public int LnghtMaps
         {
             get => _lngMaps;
@@ -103,8 +110,9 @@ namespace CTF_GAME.Model
                 _lngMaps = value;
             }
         }
+        public Hero hero { get; set; }
 
-        IObjectGameOnMap this[int hor, int vert]
+        public IObjectGameOnMap this[int hor, int vert]
         {
             get
             {
@@ -122,6 +130,7 @@ namespace CTF_GAME.Model
             _sizeVert = sizeViewVert;
             LnghtMaps = lenghtMaps;
             this.mapsObject = new IObjectGameOnMap[LnghtMaps, LnghtMaps];
+            hero = new Hero();
         }
 
         private IObjectGameOnMap[,] mapsObject;
@@ -163,7 +172,7 @@ namespace CTF_GAME.Model
             foreach (var obUnique in objUnique)
             {
                 Random random = new Random();
-                mapsObject[random.Next(0, _lngMaps), random.Next(0, _lngMaps)] = obUnique;
+                mapsObject[random.Next(0, _lngMaps), random.Next(0, _lngMaps)] = (IObjectGameOnMap)obUnique.Clone();
             }
         }
 
@@ -186,17 +195,18 @@ namespace CTF_GAME.Model
                     BestNumberRandom = randomIntChange;
                 }
             }
-            return objectGameOnMapBestRandom;
+            //Как мне это преобразование не нрав с боксингом и анбоксингом
+            return (IObjectGameOnMap)objectGameOnMapBestRandom.Clone();
         }
 
         /// <summary>
-        /// Получить центр карты относительно игрока
+        /// Получить центр карты относительно игрока с интсрукцией по перемещению
         /// </summary>
         /// <returns></returns>
         public string CenterViewMap()
         {
             int conclusionLenghtZoneHor = _sizeHor, conclusionLenghtZoneVert = _sizeVert;
-            StringBuilder viewMap = new StringBuilder();
+            StringBuilder viewMap = new StringBuilder(MoveInstruction + '\n');
             for (int vert = -conclusionLenghtZoneVert / 2; vert < conclusionLenghtZoneVert / 2; vert++)
             {
                 for (int hor = -conclusionLenghtZoneHor / 2; hor < conclusionLenghtZoneHor / 2; hor++)
@@ -207,6 +217,7 @@ namespace CTF_GAME.Model
             }
             return viewMap.ToString();
         }
+
         /// <summary>
         /// Получаем ASCII код с указанной точки на карте
         /// </summary>
@@ -225,7 +236,7 @@ namespace CTF_GAME.Model
             }
             else
             {
-                return (char)mapsObject[hor, vert].GetASCII;
+                return (char)mapsObject[hor, vert].GetASCIIOnMaps;
             }
         }
         public IObjectGameOnMap GetObjectPointMap(int hor, int vert)
@@ -240,5 +251,12 @@ namespace CTF_GAME.Model
             }
         }
 
+        /// <summary>
+        /// Убирает с клетки на которой находится герой объект, заменяя его пустым полем
+        /// </summary>
+        public void ClearMapsCell()
+        {
+            mapsObject[GameHor, GameVert] = new FieldGameOnMap();
+        }
     }
 }

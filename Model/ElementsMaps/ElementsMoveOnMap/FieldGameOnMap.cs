@@ -21,7 +21,7 @@ namespace CTF_GAME.Model
             return objChange;
         }
 
-        public override byte GetASCII
+        public override byte GetASCIIOnMaps
         {
             get
             {
@@ -41,6 +41,10 @@ namespace CTF_GAME.Model
             Move(ref mapGame, textAction);
             return mapGame.CenterViewMap();
         }
-        
+
+        public override object Clone()
+        {
+            return new FieldGameOnMap();
+        }
     }
 }
