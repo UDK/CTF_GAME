@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CTF_GAME.Model.FightsAttack
+namespace CTF_GAME.Model.FightsAttack.PhysicsAttack
 {
     public class BaseAttack : IAttack
     {
-        public override int Damage => 38;
+        public override int Damage => 25;
 
         public override int ChangeCritical => 0;
 

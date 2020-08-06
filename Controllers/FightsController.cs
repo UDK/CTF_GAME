@@ -59,10 +59,6 @@ namespace CTF_GAME.Controllers
                 int commonDamage = (action.Damage + mobsAttacks.Damage) * isCriticalDamage / mobsDefens.Armor;
                 mobsDefens.HealthPoint -= commonDamage;
             }
-            else
-            {
-
-            }
             return mobs;
 
         }

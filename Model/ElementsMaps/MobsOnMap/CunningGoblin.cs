@@ -1,48 +1,33 @@
-﻿using CTF_GAME.Model.FightsAttack;
-using CTF_GAME.Model.FightsAttack.PhysicsAttack;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
 {
-    public class Hero : AbstractMobsOnMap
+    public class CunningGoblin : AbstractMobsOnMap
     {
-        public Hero()
-        {
-            attacksTechniques.Add(new CriticalAttack());
-        }
+        private int _health = 110;
 
-        private int _health = 100;
+        private int _armor = 9;
 
-        private int _armor = 15;
+        private int _changeDodge = 20;
 
-        private int _changeDodge = 5;
+        private int _changeCriticalDamage = 25;
 
-        private int _changeCriticalDamage = 1;
+        private int _damage = 32;
 
-        private int _damage = 15;
+        private int _maxHealthPoint = 110;
 
-        private int _maxHealthPoint = 100;
+        private int _experienceForUpMobs = 500;
 
-        private int _experienceForUpMobs = 100;
+        public override byte GetASCIIOnMaps => (byte)'2';
 
-        public override byte GetASCIIOnMaps => (byte)' ';
+        public override string GetASCIIArtStart => null;
 
-        public override string GetASCIIArtStart => "";
+        public override string GetASCIIArtEnd => "             ,      ,\n            /(.-\"\"-.)\\\n        |\\  \\/      \\/  /|\n        | \\ / =.  .= \\ / |\n        \\( \\   o\\/o   / )/\n         \\_, '-/  \\-' ,_/\n           /   \\__/   \n           \\ \\__/\\__/ /\n         ___\\ \\|--|/ /___\n       /`    \\      /    `\n  jgs /       '----'       ";
 
-        public override int HealthPoint
-        {
-            get => _health;
-            set
-            {
-                if (value > MaxHealthPoint)
-                    _health = MaxHealthPoint;
-                else
-                    _health = value;
-            }
-        }
+        public override int HealthPoint { get => _health; set => _health = value; }
 
         public override int Armor
         {
@@ -98,23 +83,20 @@ namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
             set => _changeCriticalDamage = value;
         }
 
-        protected override int ExperienceForUpMobs { get => _experienceForUpMobs; set => _experienceForUpMobs = value; }
-
-        protected override int ExperienceForDeath => 100 * lvlMobs;
-
         public override int MaxHealthPoint { get => _maxHealthPoint; set => _maxHealthPoint = value; }
 
-        public override string GetASCIIArtEnd => throw new NotImplementedException();
+        protected override int ExperienceForUpMobs { get => _experienceForUpMobs; set => _experienceForUpMobs = value; }
 
-
-        public override ChangeAppearObjectMap GetRandom()
-        {
-            return new ChangeAppearObjectMap { typeRandom = TypeRandom.Never };
-        }
+        protected override int ExperienceForDeath => 135 * lvlMobs;
 
         public override object Clone()
         {
-            return new Hero();
+            return new CunningGoblin();
+        }
+
+        public override ChangeAppearObjectMap GetRandom()
+        {
+            return new ChangeAppearObjectMap() { changeRandom = 6, typeRandom = TypeRandom.RepeatingRandom };
         }
     }
 }

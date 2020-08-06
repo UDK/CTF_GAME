@@ -37,7 +37,7 @@ namespace CTF_GAME.Model.ElementsMaps.ElementsMoveOnMap
 
         public override ChangeAppearObjectMap GetRandom()
         {
-            return new ChangeAppearObjectMap() { typeRandom = TypeRandom.RepeatingRandom, changeRandom = 3 };
+            return new ChangeAppearObjectMap() { typeRandom = TypeRandom.RepeatingRandom, changeRandom = 6 };
         }
     }
 }

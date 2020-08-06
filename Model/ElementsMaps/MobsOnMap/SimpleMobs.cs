@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CTF_GAME.Model.FightsAttack.PhysicsAttack;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,11 @@ namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
 {
     public class SimpleMobs : AbstractMobsOnMap
     {
+        public SimpleMobs()
+        {
+            attacksTechniques.Add(new BaseAttack());
+        }
+
         private char ASCII = 'q';
 
         private int _health = 75;
@@ -28,7 +34,7 @@ namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
             get => (byte)ASCII;
         }
 
-        public override string GetASCIIArtStart => "                              _.--\"\"-._\n  .                         .\"         \".\n / \\    ,^.         /(     Y             |      )\\n/   `---. |--'\\    (  \\__..'--   -   -- -'\"\"-.-'  )\n|        :|    `>   '.     l_..-------.._l      .'\n|      __l;__ .'      \"-.__.||_.-'v'-._||`\"----\"\n \\  .-' | |  `              l._       _.'\n  \\/    | |                   l`^^'^^'j\n        | |                _   \\_____/     _\n j |               l `--__)-'(__.--' |\n        | |               | /`---``-----'\"1 |  ,-----.\n        | |               )/  `--' '---'   \'-'  ___  `-.\n        | |              //  `-'  '`----'  /  ,-'   I`.  \\n      _ L |_            //  `-.-.'`-----' /  /  |   |  `. \\n     '._' / \\         _/(   `/   )- ---' ;  /__.J   L.__.\\ :\n      `._;/7(-.......'  /        ) (     |  |            | |\n      `._;l _'--------_/        )-'/     :  |___.    _._./ ;\n        | |                 .__ )-'\\  __  \\  \\  I   1   / /\n        `-'                /   `-\\-(-'   \\ \\  `.|   | ,' /\n                           \\__  `-'    __/  `-. `---'',-'\n                              )-._.-- (        `-----'\n                             )(  l\\ o ('..-.\n                       _..--' _'-' '--'.-. |\n                __,,-'' _,,-''            \\ \\\n               f'. _,,-'                   \\ \\\n              ()--  |                       \\ \\\n                \\.  |                       /  \\\n                  \\ \\                      |._  |\n                   \\ \\                     |  ()|\n                    \\ \\                     \\  /\n                     ) `-.                   | |\n                    // .__)                  | |\n                 _.//7'                      | |\n               '---'                         j_| `\n                                            (| |\n                                             |  \\n                                             |lllj\n                                             |||||  -nabis";
+        public override string GetASCIIArtStart => "                              _.--\"\"-._\n  .                         .\"         \".\n / \\    ,^.         /(     Y             |      )\n/   `---. |--'\\    (  \\__..'--   -   -- -'\"\"-.-'  )\n|        :|    `>   '.     l_..-------.._l      .'\n|      __l;__ .'      \"-.__.||_.-'v'-._||`\"----\"\n \\  .-' | |  `              l._       _.'\n  \\/    | |                   l`^^'^^'j\n        | |                _   \\_____/     _\n        j |               l `--__)-'(__.--' |\n        | |               | /`---``-----'\"1 |  ,-----.\n        | |               )/  `--' '---'   \'-'  ___  `-.\n        | |              //  `-'  '`----'  /  ,-'   I`.  \n      _ L |_            //  `-.-.'`-----' /  /  |   |  `. \n     '._' / \\         _/(   `/   )- ---' ;  /__.J   L.__.\\ :\n      `._;/7(-.......'  /        ) (     |  |            | |\n      `._;l _'--------_/        )-'/     :  |___.    _._./ ;\n        | |                 .__ )-'\\  __  \\  \\  I   1   / /\n        `-'                /   `-\\-(-'   \\ \\  `.|   | ,' /\n                           \\__  `-'    __/  `-. `---'',-'\n                              )-._.-- (        `-----'\n                             )(  l\\ o ('..-.\n                       _..--' _'-' '--'.-. |\n                __,,-'' _,,-''            \\ \n               f'. _,,-'                   \\ \n              ()--  |                       \\ \n                \\.  |                       /  \n                  \\ \\                      |._  |\n                   \\ \\                     |  ()|\n                    \\ \\                     \\  /\n                     ) `-.                   | |\n                    // .__)                  | |\n                 _.//7'                      | |\n               '---'                         j_| `\n                                            (| |\n                                             |  \n                                             |lllj\n                                             |||||  -nabis";
 
         public override int HealthPoint { get => _health; set => _health = value; }
 
@@ -92,7 +98,7 @@ namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
 
         protected override int ExperienceForUpMobs { get => _experienceForUpMobs; set => _experienceForUpMobs = value; }
 
-        protected override int ExperienceForDeath => 105 * lvlMobs;
+        protected override int ExperienceForDeath => 55 * lvlMobs;
 
         public override object Clone()
         {

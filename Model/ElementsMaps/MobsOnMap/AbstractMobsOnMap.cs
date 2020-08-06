@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CTF_GAME.Controllers;
 using CTF_GAME.Model.FightsAttack;
+using CTF_GAME.Model.FightsAttack.PhysicsAttack;
 
 namespace CTF_GAME.Model.ElementsMaps
 {
@@ -144,7 +145,7 @@ namespace CTF_GAME.Model.ElementsMaps
             }
             else
             {
-                StringBuilder output = new StringBuilder($"\n       # ##### ##### ##### ##### ##### ##### ##### ##### ##### #\n     #                                                           #\n   #                                                               #\n #                                                                   #\n              HERO                                ENEMY               \n #                                 #                                 #\n        HP:  {mapGame.hero.HealthPoint}/{mapGame.hero.MaxHealthPoint}                      \tHP: {HealthPoint}/{MaxHealthPoint}\n #                                 #                                 #\n        ARMOR:  {mapGame.hero.Armor}                        \tARMOR:  {Armor}\n #                                 #                                 #\n        CHANGE DODGE:  {mapGame.hero.ChangeDodge}                  \tCHANGE DODGE:  {ChangeDodge}\n #                                 #                                 #\n        DAMAGE:  {mapGame.hero.Damage}                       \tDAMAGE:  {Damage}\n #                                 #                                 #\n \n #                                                                   #\n   #                                                               #\n     #                                                           #\n       # ##### ##### ##### ##### ##### ##### ##### ##### ##### #  ", 2048);
+                StringBuilder output = new StringBuilder($"\n       # ##### ##### ##### ##### ##### ##### ##### ##### ##### #\n     #                                                           #\n   #                                                               #\n #                                                                   #\n              HERO                                ENEMY               \n #                                 #                                 #\n        HP: {mapGame.hero.HealthPoint}/{mapGame.hero.MaxHealthPoint}                      \tHP: {HealthPoint}/{MaxHealthPoint}\n #                                 #                                 #\n        ARMOR: {mapGame.hero.Armor}                        \tARMOR: {Armor}\n #                                 #                                 #\n        CHANGE DODGE: {mapGame.hero.ChangeDodge}                  \tCHANGE DODGE: {ChangeDodge}\n #                                 #                                 #\n        DAMAGE: {mapGame.hero.Damage}                       \tDAMAGE: {Damage}\n #                                 #                                 #\n        CHANGE CRIT DAMAGE: {mapGame.hero.ChangeCriticalDamage}              \tCHANGE CRIT DAMAGE: {ChangeCriticalDamage} \n #                                                                   #\n   #                                                               #\n     #                                                           #\n       # ##### ##### ##### ##### ##### ##### ##### ##### ##### #  ", 2048);
                 StringBuilder indents = new StringBuilder(16);
                 output.Append("\nEnter the number corresponding to the attack:");
                 for (int i = 0; i < mapGame.hero.attacksTechniques.Count; i++)
@@ -164,7 +165,10 @@ namespace CTF_GAME.Model.ElementsMaps
             if (_checkThis)
             {
                 _checkThis = false;
-                return _startFight;
+                if (GetASCIIArtStart != "" && GetASCIIArtStart != null)
+                    return GetASCIIArtStart;
+                else
+                    return _startFight;
             }
             else
                 return "";

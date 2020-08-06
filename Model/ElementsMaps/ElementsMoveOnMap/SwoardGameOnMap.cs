@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CTF_GAME.Model.FightsAttack.PhysicsAttacks;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace CTF_GAME.Model
         public override string Action(ref MapGame mapGame, string textAction)
         {
             mapGame.hero.Damage += ADD_DAMAGE;
+            mapGame.hero.attacksTechniques.Add(new HeavyAttack());
             mapGame.ClearMapsCell();
             Move(ref mapGame, textAction);
             return mapGame.CenterViewMap();
