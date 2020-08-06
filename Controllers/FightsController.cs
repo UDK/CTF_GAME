@@ -36,7 +36,7 @@ namespace CTF_GAME.Controllers
                     mobs = FightsDo(mobs.enemy, mobs.hero, mobs.enemy.attacksTechniques[Random.Next(0, mobs.enemy.attacksTechniques.Count - 1)]);
             }
             if (mobs.hero.HealthPoint <= 0)
-                throw new GameEndException("game over");
+                throw new GameEndException("The desert has swallowed you up, wanderer.");
             else if (mobs.enemy.HealthPoint <= 0)
                 return new ResponseFights() { winPlayers = true, response = mobs.enemy.GetASCIIArtEnd};
             else
@@ -58,6 +58,10 @@ namespace CTF_GAME.Controllers
                 int isCriticalDamage = (mobsAttacks.ChangeCriticalDamage + ((100 - mobsAttacks.ChangeCriticalDamage) * action.ChangeCritical)) >= Random.Next(0, 100) ? 2 : 1;
                 int commonDamage = (action.Damage + mobsAttacks.Damage) * isCriticalDamage / mobsDefens.Armor;
                 mobsDefens.HealthPoint -= commonDamage;
+            }
+            else
+            {
+
             }
             return mobs;
 

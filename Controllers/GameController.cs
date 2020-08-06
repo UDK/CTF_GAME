@@ -21,7 +21,7 @@ namespace CTF_GAME.Controllers
         {
             MapGame = new MapGame(30);
             MapGame.Initialization(new FieldGameOnMap(), new OasisGameOnMap(), new SwoardGameOnMap(),
-                new SimpleMobs(), new DwarfFortressGameOnMap(), new MedicalKitGameOnMap());
+                new SimpleMobs(), new DwarfFortressGameOnMap(), new MedicalKitGameOnMap(), new BigBoss());
         }
 
         /// <summary>

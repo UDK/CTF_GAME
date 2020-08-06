@@ -20,6 +20,7 @@ namespace CTF_GAME.Model.ElementsMaps.ElementsMoveOnMap
         public override string Action(ref MapGame mapGame, string textAction)
         {
             mapGame.hero.HealthPoint += 20;
+            mapGame.ClearMapsCell();
             Move(ref mapGame, textAction);
             return mapGame.CenterViewMap();
         }

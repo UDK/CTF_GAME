@@ -7,8 +7,8 @@ namespace CTF_GAME.Model
 {
     public class SwoardGameOnMap : AbstactMethodCooperationWithMap
     {
-        private const string message = "WOW, this big and very powerful sword. I will have been hoping to me\n";
-
+        private const string MESSAGE = "WOW, this big and very powerful sword. I will have been hoping to me\n";
+        private const int ADD_DAMAGE = 52;
         private char ASCII = '|';
         public override byte GetASCIIOnMaps
         {
@@ -27,6 +27,8 @@ namespace CTF_GAME.Model
         }
         public override string Action(ref MapGame mapGame, string textAction)
         {
+            mapGame.hero.Damage += ADD_DAMAGE;
+            mapGame.ClearMapsCell();
             Move(ref mapGame, textAction);
             return mapGame.CenterViewMap();
         }
@@ -38,7 +40,7 @@ namespace CTF_GAME.Model
         }
         public override string EventStepOnGameObject(string textAction)
         {
-            return message;
+            return MESSAGE;
         }
 
         public override object Clone()

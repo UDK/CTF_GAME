@@ -16,17 +16,35 @@ namespace CTF_GAME.Model.ElementsMaps
         /// </summary>
         private bool _checkThis = true;
 
+        protected int _experience = 1;
+
         /// <summary>
         /// Текущее значения полученного опыта
         /// </summary>
-        private int _experience = 1;
+        protected int Experience
+        {
+            get => _experience;
+            set
+            {
+                if (value > ExperienceForUpMobs)
+                {
+                    var oldExpUpLvl = ExperienceForUpMobs;
+                    LvlUp();
+                    _experience = value - oldExpUpLvl;
+                }
+                else
+                {
+                    _experience += value;
+                }
+            }
+        }
 
         protected int _lvl = 1;
 
         public abstract byte GetASCIIOnMaps { get; }
 
         /// <summary>
-        /// ASCII-арт который стоит показывать, при входе из клетки карты
+        /// ASCII-арт который стоит показывать, при входе на клетку карты
         /// </summary>
         public abstract string GetASCIIArtStart { get; }
 
@@ -38,7 +56,7 @@ namespace CTF_GAME.Model.ElementsMaps
         /// <summary>
         /// Значение при котором Моб повысит себе уровень
         /// </summary>
-        protected abstract int LvlUpMobs { get; set; }
+        protected abstract int ExperienceForUpMobs { get; set; }
 
         /// <summary>
         /// Сколько опыта получить объект победивший этого моба
@@ -91,10 +109,10 @@ namespace CTF_GAME.Model.ElementsMaps
             }
             set
             {
-                if (value >= LvlUpMobs)
+                if (value >= ExperienceForUpMobs)
                 {
                     LvlUp();
-                    lvlMobs = Math.Abs(value - LvlUpMobs);
+                    lvlMobs = Math.Abs(value - ExperienceForUpMobs);
                 }
             }
         }
@@ -111,7 +129,7 @@ namespace CTF_GAME.Model.ElementsMaps
 
         private FightsController fightsAttack;
 
-        private const string _startFight = " ###### #  ####  #    # #####     ####  #####   ##   #####  ##### \n #      # #    # #    #   #      #        #    #  #  #    #   #   \n #####  # #      ######   #       ####    #   #    # #    #   #   \n #      # #  ### #    #   #           #   #   ###### #####    #   \n #      # #    # #    #   #      #    #   #   #    # #   #    #   \n #      #  ####  #    #   #       ####    #   #    # #    #   #   ";
+        private const string _startFight = " ###### #  ####  #    # #####     ####  #####   ##   #####  ##### \n #      # #    # #    #   #      #        #    #  #  #    #   #   \n #####  # #      ######   #       ####    #   #    # #    #   #   \n #      # #  ### #    #   #           #   #   ###### #####    #   \n #      # #    # #    #   #      #    #   #   #    # #   #    #   \n #      #  ####  #    #   #       ####    #   #    # #    #   #   \n Press Enter for continue...";
 
         public string Action(ref MapGame mapGame, string textAction)
         {
@@ -120,12 +138,13 @@ namespace CTF_GAME.Model.ElementsMaps
             FightsController.ResponseFights responseFights = fightsAttack.FightsDo(textAction);
             if (responseFights)
             {
+                mapGame.hero.Experience += ExperienceForDeath;
                 mapGame.ClearMapsCell();
                 return responseFights;
             }
             else
             {
-                StringBuilder output = new StringBuilder($"\n       # ##### ##### ##### ##### ##### ##### ##### ##### ##### #     \n     #                                                           #     \n   #                                                               #    \n #                                                                   #  \n              HERO                                ENEMY               \n #                                 #                                 #  \n        HP:  {mapGame.hero.HealthPoint}                            HP: {HealthPoint}\n #                                 #                                 #  \n        ARMOR:  {mapGame.hero.Armor}                          ARMOR:  {Armor}\n #                                 #                                 #  \n        CHANGE DODGE:  {mapGame.hero.ChangeDodge}                   CHANGE DODGE:  {ChangeDodge}\n #                                 #                                 #  \n                                                                       \n #                                                                   # \n   #                                                               #   \n     #                                                           #        \n       # ##### ##### ##### ##### ##### ##### ##### ##### ##### #  ", 2048);
+                StringBuilder output = new StringBuilder($"\n       # ##### ##### ##### ##### ##### ##### ##### ##### ##### #\n     #                                                           #\n   #                                                               #\n #                                                                   #\n              HERO                                ENEMY               \n #                                 #                                 #\n        HP:  {mapGame.hero.HealthPoint}/{mapGame.hero.MaxHealthPoint}                      \tHP: {HealthPoint}/{MaxHealthPoint}\n #                                 #                                 #\n        ARMOR:  {mapGame.hero.Armor}                        \tARMOR:  {Armor}\n #                                 #                                 #\n        CHANGE DODGE:  {mapGame.hero.ChangeDodge}                  \tCHANGE DODGE:  {ChangeDodge}\n #                                 #                                 #\n        DAMAGE:  {mapGame.hero.Damage}                       \tDAMAGE:  {Damage}\n #                                 #                                 #\n \n #                                                                   #\n   #                                                               #\n     #                                                           #\n       # ##### ##### ##### ##### ##### ##### ##### ##### ##### #  ", 2048);
                 StringBuilder indents = new StringBuilder(16);
                 output.Append("\nEnter the number corresponding to the attack:");
                 for (int i = 0; i < mapGame.hero.attacksTechniques.Count; i++)
@@ -158,12 +177,12 @@ namespace CTF_GAME.Model.ElementsMaps
         /// </summary>
         public virtual void LvlUp()
         {
-            LvlUpMobs *= 2;
-            MaxHealthPoint += 30;
+            ExperienceForUpMobs *= 2;
+            MaxHealthPoint += 46;
             HealthPoint = MaxHealthPoint;
             Armor += 2;
-            ChangeCriticalDamage += 2;
-            Damage += 5;
+            ChangeCriticalDamage += 1;
+            Damage += 8;
         }
 
         public abstract object Clone();

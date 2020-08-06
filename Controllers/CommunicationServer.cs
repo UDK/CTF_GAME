@@ -38,9 +38,10 @@ namespace CTF_GAME.Controllers
         /// <summary>
         /// Ассинхронно стартуем обработку всех приходящих ответов с клиента
         /// </summary>
-        private async void Start()
+        private async Task Start()
         {
             Hello();
+            //Этот прекрасный while true надо будет заменить на проверку работы сервера или проверку соединения
             while (true)
             {
                 try

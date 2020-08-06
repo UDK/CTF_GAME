@@ -1,35 +1,33 @@
-﻿using CTF_GAME.Model.FightsAttack;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
 {
-    public class Hero : AbstractMobsOnMap
+    public class BigBoss : AbstractMobsOnMap
     {
-        public Hero()
-        {
-            attacksTechniques.Add(new CriticalAttack());
-        }
+        private int _health = 1000;
 
-        private int _health = 100;
+        private int _armor = 35;
 
-        private int _armor = 15;
+        private int _changeDodge = 15;
 
-        private int _changeDodge = 5;
+        private int _changeCriticalDamage = 8;
 
-        private int _changeCriticalDamage = 1;
+        private int _damage = 96;
 
-        private int _damage = 15;
+        private int _maxHealthPoint = 1000;
 
-        private int _maxHealthPoint = 100;
+        private int _lvlUpMobs = 10000;
 
-        private int _experienceForUpMobs = 100;
+        public override byte GetASCIIOnMaps => (byte)'!';
 
-        public override byte GetASCIIOnMaps => (byte)' ';
+        public override string GetASCIIArtStart => @"                 ___====-_  _-====___\n           _--^^^#####//      \\#####^^^--_\n        _-^##########// (    ) \\##########^-_\n       -############//  |\^^/|  \\############-\n     _/############//   (@::@)   \\############\_\n    /#############((     \\//     ))#############\\n   -###############\\    (oo)    //###############-\n  -#################\\  / VV \  //#################-\n -###################\\/      \//###################-\n_#/|##########/\######(   /\   )######/\##########|\#_\n|/ |#/\#/\#/\/  \#/\##\  |  |  /##/\#/  \/\#/\#/\#| \|\n`  |/  V  V  `   V  \#\| |  | |/#/  V   '  V  V  \|  '\n   `   `  `      `   / | |  | | \   '      '  '   '\n                    (  | |  | |  )\n                   __\ | |  | | /__\n                  (vvv(VVV)(VVV)vvv)";
 
-        public override string GetASCIIArtStart => "";
+        public override string GetASCIIArtEnd => "flag_ctf{DEMO_FLAG_PART_II}";
+
+        public override int MaxHealthPoint { get => _maxHealthPoint; set => _maxHealthPoint = value; }
 
         public override int HealthPoint
         {
@@ -42,7 +40,6 @@ namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
                     _health = value;
             }
         }
-
         public override int Armor
         {
             get
@@ -56,7 +53,6 @@ namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
             }
             set => _armor = value;
         }
-
         public override int ChangeDodge
         {
             get
@@ -97,23 +93,18 @@ namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
             set => _changeCriticalDamage = value;
         }
 
-        protected override int ExperienceForUpMobs { get => _experienceForUpMobs; set => _experienceForUpMobs = value; }
+        protected override int ExperienceForUpMobs { get => _lvlUpMobs; set => _lvlUpMobs = value; }
 
-        protected override int ExperienceForDeath => 100 * lvlMobs;
-
-        public override int MaxHealthPoint { get => _maxHealthPoint; set => _maxHealthPoint = value; }
-
-        public override string GetASCIIArtEnd => throw new NotImplementedException();
-
-
-        public override ChangeAppearObjectMap GetRandom()
-        {
-            return new ChangeAppearObjectMap { typeRandom = TypeRandom.Never };
-        }
+        protected override int ExperienceForDeath => 500 * lvlMobs;
 
         public override object Clone()
         {
-            return new Hero();
+            return new BigBoss();
+        }
+
+        public override ChangeAppearObjectMap GetRandom()
+        {
+            return new ChangeAppearObjectMap() { typeRandom = TypeRandom.UniqueRandom };
         }
     }
 }

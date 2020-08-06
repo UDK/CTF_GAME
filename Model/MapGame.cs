@@ -42,6 +42,12 @@ namespace CTF_GAME.Model
         /// Где находится игрок по горизонтали
         /// </summary>
         private int gameHor;
+        
+        /// <summary>
+        /// Инструкция по перемещению на карте
+        /// </summary>
+        private string MoveInstruction => "s - move down, a - move left, w - move top, d - move right ";
+
         public int GameVert
         {
             get
@@ -194,13 +200,13 @@ namespace CTF_GAME.Model
         }
 
         /// <summary>
-        /// Получить центр карты относительно игрока
+        /// Получить центр карты относительно игрока с интсрукцией по перемещению
         /// </summary>
         /// <returns></returns>
         public string CenterViewMap()
         {
             int conclusionLenghtZoneHor = _sizeHor, conclusionLenghtZoneVert = _sizeVert;
-            StringBuilder viewMap = new StringBuilder();
+            StringBuilder viewMap = new StringBuilder(MoveInstruction + '\n');
             for (int vert = -conclusionLenghtZoneVert / 2; vert < conclusionLenghtZoneVert / 2; vert++)
             {
                 for (int hor = -conclusionLenghtZoneHor / 2; hor < conclusionLenghtZoneHor / 2; hor++)

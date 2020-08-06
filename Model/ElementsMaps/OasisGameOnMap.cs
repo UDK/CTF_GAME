@@ -37,7 +37,7 @@ namespace CTF_GAME.Model
 
         public string EventStepOnGameObject(string textAction)
         {
-            return "flag_ctf{govno}";
+            return "flag_ctf{DEMO_FLAG_PART_I}. I hope you got all the other parts of the flag in time";
         }
 
         public ChangeAppearObjectMap GetRandom()
