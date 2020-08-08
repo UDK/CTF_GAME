@@ -38,7 +38,7 @@ namespace CTF_GAME.Controllers
             if (mobs.hero.HealthPoint <= 0)
                 throw new GameEndException("The desert has swallowed you up, wanderer.");
             else if (mobs.enemy.HealthPoint <= 0)
-                return new ResponseFights() { winPlayers = true, response = mobs.enemy.GetASCIIArtEnd};
+                return new ResponseFights() { winPlayers = true, response = mobs.enemy.GetASCIIArtEnd };
             else
                 return new ResponseFights() { winPlayers = false };
         }
@@ -58,9 +58,11 @@ namespace CTF_GAME.Controllers
             {
                 random = Random.Next(1, 100);
                 //Рассчитываем выпал ли нам крит, если да, то получем 2 и умножаем её на общий дамаг
-                int isCriticalDamage = (mobsAttacks.ChangeCriticalDamage + ((100 - mobsAttacks.ChangeCriticalDamage) * action.ChangeCritical)) >= random ? 2 : 1;
-                int commonDamage = (action.Damage + mobsAttacks.Damage) * isCriticalDamage / mobsDefens.Armor;
-                mobsDefens.HealthPoint -= commonDamage;
+                int isCriticalDamage = (mobsAttacks.ChangeCriticalDamage + (((float)(100 - mobsAttacks.ChangeCriticalDamage) / 100) * action.ChangeCritical)) >= random ? 2 : 1;
+                float factorArmor = ((float)(100 - mobsDefens.Armor) / 100);
+                float commonDamage = (float)((action.Damage + mobsAttacks.Damage) * isCriticalDamage) * factorArmor;
+                //Округляем в меньшую сторону
+                mobsDefens.HealthPoint -= (int)commonDamage;
             }
             return mobs;
 
@@ -86,7 +88,7 @@ namespace CTF_GAME.Controllers
             {
                 return x.winPlayers;
             }
-            
+
             public static implicit operator string(ResponseFights x)
             {
                 return x.response;
