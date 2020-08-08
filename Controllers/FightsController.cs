@@ -52,10 +52,13 @@ namespace CTF_GAME.Controllers
         /// <returns></returns>
         private CubeEnemy FightsDo(AbstractMobsOnMap mobsAttacks, AbstractMobsOnMap mobsDefens, IAttack action)
         {
-            //Рассчитываем выпал ли нам крит, если да, то получем 2 и умножаем её на общий дамаг
-            if (!(mobsDefens.ChangeDodge >= Random.Next(0, 100)))
+            int random = Random.Next(1, 100);
+            //Рассчитываем выпал смог ли моб уклониться
+            if (mobsDefens.ChangeDodge <= random)
             {
-                int isCriticalDamage = (mobsAttacks.ChangeCriticalDamage + ((100 - mobsAttacks.ChangeCriticalDamage) * action.ChangeCritical)) >= Random.Next(0, 100) ? 2 : 1;
+                random = Random.Next(1, 100);
+                //Рассчитываем выпал ли нам крит, если да, то получем 2 и умножаем её на общий дамаг
+                int isCriticalDamage = (mobsAttacks.ChangeCriticalDamage + ((100 - mobsAttacks.ChangeCriticalDamage) * action.ChangeCritical)) >= random ? 2 : 1;
                 int commonDamage = (action.Damage + mobsAttacks.Damage) * isCriticalDamage / mobsDefens.Armor;
                 mobsDefens.HealthPoint -= commonDamage;
             }
