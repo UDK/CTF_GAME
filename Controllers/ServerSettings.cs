@@ -20,7 +20,7 @@ namespace CTF_GAME.Controllers
         const int _lenghtBuffer = 1024;
         List<CommunicationServer> tcpClients = new List<CommunicationServer>();
 
-        public int Port { get; set; } = 8080;
+        public int Port { get; set; } = 8097;
 
         public IPAddress IpAddr { get; set; } = IPAddress.Parse("0.0.0.0");
 
