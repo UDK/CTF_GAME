@@ -3,7 +3,6 @@
 ## Linux
 
 ```bash
-$ pip install -r requirements.txt
 $ yum install nc
 $ nc 192.99.166.44 8097
 ```
