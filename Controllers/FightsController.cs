@@ -28,7 +28,7 @@ namespace CTF_GAME.Controllers
         /// <returns>Сообщает, победил ли игрок</returns>
         public ResponseFights FightsDo(string action)
         {
-            if (int.TryParse(action, out int numberTechniquesAttack) && numberTechniquesAttack >= 0 && numberTechniquesAttack <= mobs.hero.attacksTechniques.Count)
+            if (int.TryParse(action, out int numberTechniquesAttack) && numberTechniquesAttack >= 0 && numberTechniquesAttack < mobs.hero.attacksTechniques.Count)
             {
                 mobs = FightsDo(mobs.hero, mobs.enemy, mobs.hero.attacksTechniques[numberTechniquesAttack]);
                 //Если будет время, то стоит написать нормальный ИИ
