@@ -14,17 +14,17 @@ namespace CTF_GAME.Model.ElementsMaps.MobsOnMap
             attacksTechniques.Add(new CriticalAttack());
         }
 
-        private int _health = 100;
+        private int _health = 190;
 
-        private int _armor = 15;
+        private int _armor = 22;
 
-        private int _changeDodge = 5;
+        private int _changeDodge = 7;
 
-        private int _changeCriticalDamage = 1;
+        private int _changeCriticalDamage = 4;
 
-        private int _damage = 15;
+        private int _damage = 25;
 
-        private int _maxHealthPoint = 100;
+        private int _maxHealthPoint = 190;
 
         private int _experienceForUpMobs = 100;
 

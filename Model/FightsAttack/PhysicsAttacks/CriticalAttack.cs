@@ -9,7 +9,7 @@ namespace CTF_GAME.Model.FightsAttack.PhysicsAttack
     {
         public override string NameAttack => "Tricky hit";
 
-        public override int Damage => 15;
+        public override int Damage => 10;
 
         public override int ChangeCritical => 25;
     }
