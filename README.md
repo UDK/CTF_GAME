@@ -30,5 +30,7 @@ Please, play at high resolution, as not all ascii art can be displayed correctly
 # Задачи, которые надо сделать
 
 :negative_squared_cross_mark: Заполнить карту мобами и игровыми объектами
+
 :negative_squared_cross_mark: Покрыть код тестами	
+
 :negative_squared_cross_mark: Добавить настройки сложности, разрешения
