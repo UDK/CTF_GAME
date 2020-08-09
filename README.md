@@ -13,7 +13,8 @@ $ git clone https://github.com/diegocr/netcat.git
 $ cd .\netcat\
 $ .\nc.exe 192.99.166.44 8097
 ```
-Please, play at high resolution, as not all ascii art can be displayed correctly
+Please, play at high resolution, as not all ascii art can be displayed correctly.
+
 Пожалуйста, играйте в высоком разрешении, так как не все ascii-изображения могут отображаться правильно.
 
 # Архитектура
