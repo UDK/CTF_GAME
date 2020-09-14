@@ -20,7 +20,7 @@ namespace CTF_GAME.Controllers
         const int _lenghtBuffer = 1024;
         List<CommunicationServer> tcpClients = new List<CommunicationServer>();
 
-        public int Port { get; set; } = 8097;
+        public int Port { get; set; } = 8098;
 
         public IPAddress IpAddr { get; set; } = IPAddress.Parse("0.0.0.0");
 
@@ -32,13 +32,15 @@ namespace CTF_GAME.Controllers
         /// Стартуем + бесконечно читаем порт и работаем с клиентами
         /// </summary>
         /// <param name="tcpServer">Настроенный tcp-сервер</param>
-        private void StartServer(TcpListener tcpServer)
+        private async void StartServer(TcpListener tcpServer)
         {
             int ID = 0;
             tcpServer.Start();
             while (true)
             {
-                var newClient = new CommunicationServer(tcpServer.AcceptTcpClient().GetStream());
+                TcpClient streamClient = await tcpServer.AcceptTcpClientAsync();
+                CommunicationServer newClient = new CommunicationServer(streamClient.GetStream());
+                newClient.Start();
                 newClient.networkClose += DeleteClosedNetwork;
                 tcpClients.Add(newClient);
                 ID++;
