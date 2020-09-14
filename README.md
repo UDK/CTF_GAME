@@ -4,14 +4,14 @@
 
 ```bash
 $ yum install nc
-$ nc 192.99.166.44 8097
+$ nc 192.99.166.44 32771
 ```
 ## Windows
 
 ```powershell
 $ git clone https://github.com/diegocr/netcat.git
 $ cd .\netcat\
-$ .\nc.exe 192.99.166.44 8097
+$ .\nc.exe 192.99.166.44 32771
 ```
 Please, play at high resolution, as not all ascii art can be displayed correctly.
 
