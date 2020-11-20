@@ -14,11 +14,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <None Remove="Web\client\Dockerfile" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Web\Client\" />
+    <Compile Include="Web\client\Dockerfile" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
   </ItemGroup>
 
 
