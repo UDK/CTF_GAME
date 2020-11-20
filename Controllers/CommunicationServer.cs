@@ -32,13 +32,12 @@ namespace CTF_GAME.Controllers
         {
             gameController = new GameController();
             this.networkStreamWithClient = networkStream;
-            Start();
         }
 
         /// <summary>
         /// Ассинхронно стартуем обработку всех приходящих ответов с клиента
         /// </summary>
-        private async Task Start()
+        public async Task Start()
         {
             Hello();
             //Этот прекрасный while true надо будет заменить на проверку работы сервера или проверку соединения

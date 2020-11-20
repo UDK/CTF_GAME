@@ -7,4 +7,23 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-     - 8081:8097
+     - 8081:8098
+    networks:
+      game:
+        ipv4_address: 10.5.0.10
+  frontend:
+    build:
+      context: "Web/client/"
+      dockerfile: "Dockerfile"
+    ports:
+    - 8080:8080
+    networks:
+      game:
+        ipv4_address: 10.5.0.9
+
+networks:
+  game:
+    driver: bridge
+    ipam:
+      config:
+       - subnet: 10.5.0.0/16
